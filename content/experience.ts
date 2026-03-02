@@ -2,6 +2,8 @@ export type ExperienceItem = {
   role: string;
   company: string;
   duration: string;
+  logo?: string;
+  logoAlt?: string;
   location?: string;
   remote?: boolean;
   achievements: string[];
@@ -12,6 +14,8 @@ export const experience: ExperienceItem[] = [
     role: "Software Engineer",
     company: "Company Name",
     duration: "2022 – Present",
+    logo: "/logos/company-name.svg",
+    logoAlt: "Company Name logo",
     location: "Remote",
     remote: true,
     achievements: [
@@ -24,6 +28,8 @@ export const experience: ExperienceItem[] = [
     role: "Frontend Developer",
     company: "Previous Company",
     duration: "2020 – 2022",
+    logo: "/logos/previous-company.svg",
+    logoAlt: "Previous Company logo",
     remote: true,
     achievements: [
       "Developed reusable UI components and design system in TypeScript.",

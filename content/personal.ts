@@ -1,6 +1,7 @@
 export const personal = {
-  name: "Salah",
+  name: "Salah Bentayeb",
   title: "Software Engineer",
+  tagline: "Developer | Engineer | Passionate",
   headline: "Hi, I'm Salah — Software Engineer",
   subheading:
     "I build modern web applications with a focus on performance, clean architecture, and great user experience.",
