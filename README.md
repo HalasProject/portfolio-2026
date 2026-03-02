@@ -1,4 +1,11 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Salah — Personal Portfolio
+
+A modern, dark-themed portfolio built with Next.js (App Router), TypeScript, Tailwind CSS, Framer Motion, and Three.js. Deploy-ready for Vercel.
+
+## Customization
+
+- **Content**: Edit files in `content/` to match your info (personal, skills, experience, projects, socials). Pull data from your existing site (e.g. salah.cloud) and paste into these modules.
+- **CV**: Place your PDF resume in `public/cv.pdf` so the "Download CV" button works. The link points to `/cv.pdf`.
 
 ## Getting Started
 
