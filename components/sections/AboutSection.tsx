@@ -43,7 +43,11 @@ const item = {
 
 export function AboutSection() {
   return (
-    <section id="about" className="relative py-20 sm:py-28 overflow-hidden">
+    <section
+      id="about"
+      data-section
+      className="relative py-20 sm:py-28 overflow-hidden"
+    >
       {/* Subtle background accent */}
       <div
         className="absolute inset-0 -z-10"

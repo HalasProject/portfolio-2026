@@ -54,6 +54,15 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Section snap scrolling for nicer transitions between hero / about / experience / projects / contact */
+main#main-content {
+  scroll-snap-type: y proximity;
+}
+
+main#main-content > section {
+  scroll-snap-align: start;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;

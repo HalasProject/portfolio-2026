@@ -10,6 +10,7 @@ export function ExperienceSection() {
   return (
     <section
       id="experience"
+      data-section
       className="relative py-20 sm:py-28 overflow-hidden bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950"
     >
       <div className="container mx-auto px-4 sm:px-6">
@@ -85,21 +86,50 @@ export function ExperienceSection() {
                     </div>
                   )}
 
-                  <ul className="mt-4 flex-1 space-y-2">
-                    {job.achievements.map((achievement, i) => (
-                      <li
-                        key={i}
-                        className="flex gap-2 text-muted-foreground text-sm leading-relaxed"
-                      >
-                        <ChevronRight
-                          size={14}
-                          className="mt-0.5 shrink-0 text-accent"
-                          aria-hidden
-                        />
-                        <span>{achievement}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  <div className="mt-4 flex-1 space-y-3">
+                    <div>
+                      <p className="mb-1.5 text-xs font-semibold uppercase tracking-wider text-accent/90">
+                        Key Contributions
+                      </p>
+                      <ul className="space-y-1.5">
+                        {job.keyContributions.map((item, i) => (
+                          <li
+                            key={i}
+                            className="flex gap-2 text-muted-foreground text-sm leading-relaxed"
+                          >
+                            <ChevronRight
+                              size={14}
+                              className="mt-0.5 shrink-0 text-accent"
+                              aria-hidden
+                            />
+                            <span>{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                    {job.businessImpact && job.businessImpact.length > 0 && (
+                      <div>
+                        <p className="mb-1.5 text-xs font-semibold uppercase tracking-wider text-accent/90">
+                          Business Impact
+                        </p>
+                        <ul className="space-y-1.5">
+                          {job.businessImpact.map((item, i) => (
+                            <li
+                              key={i}
+                              className="flex gap-2 text-muted-foreground text-sm leading-relaxed"
+                            >
+                              <ChevronRight
+                                size={14}
+                                className="mt-0.5 shrink-0 text-accent"
+                                aria-hidden
+                              />
+                              <span>{item}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                  </div>
 
                   {job.technologies && job.technologies.length > 0 && (
                     <div className="mt-4 flex flex-wrap gap-1.5 pt-3 border-t border-border/60">

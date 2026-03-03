@@ -24,7 +24,7 @@ export function ContactSection() {
   }
 
   return (
-    <section id="contact" className="py-20 sm:py-28 bg-card/20">
+    <section id="contact" data-section className="py-20 sm:py-28 bg-card/20">
       <div className="container mx-auto px-4 sm:px-6">
         <SectionHeader
           title="Contact"

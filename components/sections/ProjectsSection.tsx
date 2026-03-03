@@ -10,7 +10,7 @@ import { Tag } from "@/components/ui/Tag";
 
 export function ProjectsSection() {
   return (
-    <section id="projects" className="py-20 sm:py-28">
+    <section id="projects" data-section className="py-20 sm:py-28">
       <div className="container mx-auto px-4 sm:px-6">
         <SectionHeader
           title="Projects"

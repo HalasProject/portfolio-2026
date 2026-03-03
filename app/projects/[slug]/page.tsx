@@ -1,8 +1,10 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ProjectImage } from "@/components/ui/ProjectImage";
+import { ProjectGallery } from "@/components/ui/ProjectGallery";
 import { ArrowLeft, ExternalLink, Github, Check } from "lucide-react";
 import { getProjectBySlug, projects } from "@/content/projects";
+import { getProjectGalleryImages } from "@/lib/project-images";
 import { Footer } from "@/components/layout/Footer";
 
 export async function generateStaticParams() {
@@ -32,6 +34,8 @@ export default async function ProjectPage({
   const project = getProjectBySlug(slug);
   if (!project) notFound();
 
+  const galleryImages = getProjectGalleryImages(slug);
+
   return (
     <>
       <main className="min-h-screen">
@@ -56,6 +60,9 @@ export default async function ProjectPage({
                 priority
               />
             </div>
+
+            {/* Project gallery from public/projects/[slug]/ */}
+            <ProjectGallery images={galleryImages} title={project.title} />
 
             <header className="mb-10">
               <h1 className="text-3xl sm:text-4xl font-bold tracking-tight">

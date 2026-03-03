@@ -72,6 +72,7 @@ export default function HeroCanvas() {
   return (
     <section
       id="home"
+      data-section
       style={{ fontFamily: "'Bebas Neue', sans-serif" }}
       className="relative w-full min-h-screen bg-black overflow-hidden rounded-3xl"
     >
@@ -422,9 +423,8 @@ export default function HeroCanvas() {
             marginBottom: 20,
           }}
         >
-          Merging design thinking with human insight to create digital
-          experiences that don&apos;t just look great — they perform
-          effortlessly.
+          The details nobody notices are exactly why everything feels right.
+
         </p>
         <a href="#contact" className="lets-talk-btn">
           <span className="btn-text" style={{ fontSize: 15 }}>

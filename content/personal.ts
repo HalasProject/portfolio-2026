@@ -4,7 +4,7 @@ export const personal = {
   tagline: "Developer | Engineer | Passionate",
   headline: "Hi, I'm Salah — Software Engineer",
   subheading:
-    "I build modern web applications with a focus on performance, clean architecture, and great user experience.",
+    "I don't just write code — I engineer experiences. Every pixel, every function, every interaction is intentional.",
   bio: "I'm a software engineer passionate about full-stack development, from React and Next.js on the frontend to Node.js and APIs on the backend. I enjoy turning ideas into scalable, maintainable products.",
   location: "Remote",
   photo: "me.png",
