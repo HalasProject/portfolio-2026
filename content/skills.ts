@@ -1,6 +1,8 @@
 export type SkillIcon =
   | "react"
   | "nextjs"
+  | "vue"
+  | "javascript"
   | "typescript"
   | "tailwind"
   | "node"
@@ -8,7 +10,13 @@ export type SkillIcon =
   | "database"
   | "git"
   | "docker"
-  | "vercel";
+  | "vercel"
+  | "aws"
+  | "python"
+  | "django"
+  | "laravel"
+  | "postgres"
+  | "aiAgent";
 
 export type SkillItem = {
   name: string;
@@ -26,6 +34,8 @@ export const skills: SkillGroup[] = [
     items: [
       { name: "React", icon: "react" },
       { name: "Next.js", icon: "nextjs" },
+       { name: "Vue.js", icon: "vue" },
+       { name: "JavaScript", icon: "javascript" },
       { name: "TypeScript", icon: "typescript" },
       { name: "Tailwind CSS", icon: "tailwind" },
     ],
@@ -35,15 +45,26 @@ export const skills: SkillGroup[] = [
     items: [
       { name: "Node.js", icon: "node" },
       { name: "REST APIs", icon: "api" },
-      { name: "Database Design", icon: "database" },
+      { name: "Laravel (PHP)", icon: "laravel" },
+      { name: "Python", icon: "python" },
+      { name: "Django", icon: "django" },
     ],
   },
   {
-    label: "DevOps & Tooling",
+    label: "Cloud, Data & DevOps",
     items: [
       { name: "Git & GitHub", icon: "git" },
       { name: "Docker", icon: "docker" },
+      { name: "AWS", icon: "aws" },
+      { name: "PostgreSQL", icon: "postgres" },
+      { name: "Database Design", icon: "database" },
       { name: "Vercel", icon: "vercel" },
+    ],
+  },
+  {
+    label: "AI & Automation",
+    items: [
+      { name: "AI Agents & Automation", icon: "aiAgent" },
     ],
   },
 ];

@@ -36,6 +36,9 @@ export const metadata: Metadata = {
     description:
       "Personal portfolio of Salah — Software Engineer. Projects, experience, and contact.",
   },
+  icons: {
+    icon: "/favicon.svg",
+  },
   robots: {
     index: true,
     follow: true,

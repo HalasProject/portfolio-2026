@@ -1,16 +1,68 @@
 "use client";
 
 import Image from "next/image";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { personal } from "@/content/personal";
 import { socials } from "@/content/socials";
+import { Linkedin, Send } from "lucide-react";
+
+const SMALL_SCREEN_BREAKPOINT = 768;
 
 export default function HeroCanvas() {
   const [loaded, setLoaded] = useState(false);
+  const [fontSize, setFontSize] = useState(160);
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const nameRef = useRef<HTMLDivElement>(null);
+  const measureRef = useRef<HTMLDivElement>(null);
+
+  const fitNameToWidth = useCallback(() => {
+    if (!measureRef.current || !nameRef.current) return;
+    const container = measureRef.current;
+    const textEl = nameRef.current;
+    const targetWidth = container.offsetWidth - 56; // padding 28px each side (tighter = taller text)
+    if (targetWidth <= 0) return;
+    // Binary search for font-size that fits — allow larger max for taller impact
+    let low = 40;
+    let high = 520;
+    const text = textEl.textContent || "";
+    const temp = document.createElement("span");
+    temp.style.cssText = "visibility:hidden;position:absolute;white-space:nowrap;font-family:'Bebas Neue',sans-serif;letter-spacing:-3px;";
+    temp.textContent = text;
+    document.body.appendChild(temp);
+    for (let i = 0; i < 22; i++) {
+      const mid = (low + high) / 2;
+      temp.style.fontSize = `${mid}px`;
+      if (temp.offsetWidth <= targetWidth) low = mid;
+      else high = mid;
+    }
+    document.body.removeChild(temp);
+    setFontSize(Math.floor(low));
+  }, []);
 
   useEffect(() => {
     setTimeout(() => setLoaded(true), 100);
   }, []);
+
+  useEffect(() => {
+    const mq = window.matchMedia(`(max-width: ${SMALL_SCREEN_BREAKPOINT - 1}px)`);
+    const handler = (e: MediaQueryListEvent) => setIsSmallScreen(e.matches);
+    queueMicrotask(() => setIsSmallScreen(mq.matches)); // initial value (async to avoid lint)
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+
+  useEffect(() => {
+    const run = () => fitNameToWidth();
+    run();
+    document.fonts?.ready?.then(run);
+    const ro = new ResizeObserver(run);
+    if (measureRef.current) ro.observe(measureRef.current);
+    window.addEventListener("resize", run);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", run);
+    };
+  }, [fitNameToWidth, isSmallScreen]);
 
   const nameParts = personal.name.split(" ");
   const firstName = nameParts[0] ?? personal.name;
@@ -26,19 +78,21 @@ export default function HeroCanvas() {
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500&display=swap');
 
-        .hero-name {
-          font-family: 'Bebas Neue', sans-serif;
-          font-size: clamp(110px, 18vw, 230px);
-          line-height: 0.9;
-          letter-spacing: -3px;
-          color: white;
+        .hero-name-wrapper {
           position: absolute;
           top: 4px;
           left: 0;
           right: 0;
-          padding: 28px 40px 0;
+          padding: 20px 28px 0;
           z-index: 10;
           pointer-events: none;
+        }
+        .hero-name {
+          font-family: 'Bebas Neue', sans-serif;
+          line-height: 0.9;
+          letter-spacing: -3px;
+          color: white;
+          white-space: nowrap;
           opacity: 0;
           transform: translateY(20px);
           transition: opacity 0.8s ease, transform 0.8s ease;
@@ -63,6 +117,15 @@ export default function HeroCanvas() {
         .fade-in.visible {
           opacity: 1;
           transform: translateY(0);
+        }
+        .hero-photo {
+          opacity: 0;
+          transform: translateX(-50%) translateY(32px);
+          transition: opacity 0.9s ease 0.2s, transform 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.2s;
+        }
+        .hero-photo.visible {
+          opacity: 1;
+          transform: translateX(-50%) translateY(0);
         }
         .social-btn {
           width: 44px;
@@ -181,18 +244,23 @@ export default function HeroCanvas() {
         }}
       />
 
-      {/* Big Name — behind image */}
-      <div className={`hero-name ${loaded ? "visible" : ""}`}>
-        {firstName} {lastName}
+      {/* Big Name — behind image, fits container width */}
+      <div ref={measureRef} className="hero-name-wrapper">
+        <div
+          ref={nameRef}
+          className={`hero-name ${loaded ? "visible" : ""}`}
+          style={{ fontSize: `${fontSize}px` }}
+        >
+          {isSmallScreen ? firstName : `${firstName} ${lastName}`}
+        </div>
       </div>
 
       {/* Photo — center, z above name. Mobile: slightly higher; desktop: bottom 0 */}
       <div
-        className="bottom-[9em] md:bottom-0"
+        className={`hero-photo bottom-[9em] md:bottom-0 ${loaded ? "visible" : ""}`}
         style={{
           position: "absolute",
           left: "50%",
-          transform: "translateX(-50%)",
           zIndex: 20,
           width: "clamp(620px, 60%, 1100px)",
           height: "100%",
@@ -267,21 +335,13 @@ export default function HeroCanvas() {
             </svg>
           </a>
           <a
-            href={socials.telegram}
+            href={socials.linkedin}
             target="_blank"
             rel="noopener noreferrer"
             className="social-btn"
-            aria-label="Telegram"
+            aria-label="Linkedin"
           >
-            <svg
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
-              fill="white"
-              aria-hidden
-            >
-              <path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.611-.06-2.586-.293-.49-.115-.988-.247-1.487-.41-.485-.168-1.156-.376-1.156-.376.088-.042.112-.063.113-.064.121-.072.265-.124.265-.124.664-.293 1.092-.49 1.092-.49.92-.416 1.412-.64 1.649-.765.227-.122.374-.2.456-.248a.779.779 0 0 0 .255-.102c.082-.069.105-.125.105-.192 0-.248-.513-.73-.748-.927a.976.976 0 0 0-.719-.231c-.602.008-1.07.322-1.443.966-.411.72-.977 2.482-.977 2.482-.409.869-.815 1.958-1.237 2.485-.246.312-.494.438-.659.438-.428-.008-.757-.242-.929-.477-.326-.347-.913-.889-.913-.889-.351-.304-.669-.523-.669-.523-.119-.084-.27-.14-.27-.14s.312.073.777.213c.412.128 1.051.385 1.158.433.121.057.189.083.189.083.396.169.715.304 1.129.472.661.267 1.163.39 1.675.498.394.082.814.128 1.248.128.08 0 .159-.002.238-.005a.996.996 0 0 0 .248-.033 12.97 12.97 0 0 0 1.372-.448 6.075 6.075 0 0 0 1.6-1.036 6.35 6.35 0 0 0 1.431-1.708 6.035 6.035 0 0 0 .95-2.514 6.194 6.194 0 0 0 .004-.97 6.032 6.032 0 0 0-.249-1.631z" />
-            </svg>
+            <Linkedin size={18} />
           </a>
           <a
             href={socials.github}
@@ -303,11 +363,45 @@ export default function HeroCanvas() {
         </div>
       </div>
 
-      {/* Bottom: tagline + CTA — mobile: short description + Let's Talk centered; desktop: right-aligned with tagline */}
+      {/* Bottom: tagline + CTA — mobile: socials + short description + Let's Talk centered; desktop: right-aligned with tagline */}
       <div
-        className={`fade-in absolute bottom-10 left-0 right-0 z-30 flex flex-col items-center justify-center px-4 md:left-auto md:right-8 md:bottom-16 md:items-end md:max-w-[300px] md:px-0 ${loaded ? "visible" : ""}`}
+        className={`fade-in absolute bottom-10 left-0 right-0 z-30 flex flex-col items-center justify-center px-4 pb-[max(1rem,env(safe-area-inset-bottom))] md:bottom-16 md:pb-0 md:left-auto md:right-8 md:items-end md:max-w-[300px] md:px-0 ${loaded ? "visible" : ""}`}
         style={{ transitionDelay: "0.5s" }}
       >
+        {/* Mobile-only: social buttons above tagline */}
+        <div className="mb-4 flex gap-3 md:hidden">
+          <a
+            href={socials.whatsapp}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="social-btn"
+            aria-label="WhatsApp"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="white" aria-hidden>
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+            </svg>
+          </a>
+          <a
+            href={socials.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="social-btn"
+            aria-label="Linkedin"
+          >
+            <Linkedin size={18} />
+          </a>
+          <a
+            href={socials.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="social-btn"
+            aria-label="GitHub"
+          >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="white" aria-hidden>
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+            </svg>
+          </a>
+        </div>
         <p
           className="body-text mb-2 text-center text-xs font-medium uppercase tracking-wider text-violet-300 md:hidden"
           style={{ letterSpacing: "0.12em" }}

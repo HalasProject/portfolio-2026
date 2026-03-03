@@ -2,53 +2,82 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { MapPin, Briefcase } from "lucide-react";
+import { MapPin, ChevronRight } from "lucide-react";
 import { experience } from "@/content/experience";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { Card } from "@/components/ui/Card";
 
 export function ExperienceSection() {
   return (
-    <section id="experience" className="py-20 sm:py-28 bg-card/20">
+    <section
+      id="experience"
+      className="relative py-20 sm:py-28 overflow-hidden bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950"
+    >
       <div className="container mx-auto px-4 sm:px-6">
         <SectionHeader
           title="Experience"
           subtitle="Where I've worked and what I've delivered."
         />
 
-        <div className="relative max-w-3xl mx-auto space-y-8">
-          {experience.map((job, index) => (
-            <Card key={index} className="text-left">
-              <div className="flex items-start gap-4">
-                {job.logo && (
-                  <div className="mt-1 h-12 w-12 shrink-0 overflow-hidden rounded-xl border border-border bg-card flex items-center justify-center">
-                    <Image
-                      src={job.logo}
-                      alt={job.logoAlt ?? `${job.company} logo`}
-                      width={48}
-                      height={48}
-                      className="h-8 w-8 object-contain"
-                    />
-                  </div>
-                )}
+        {/* Horizontal scrollable cards */}
+        <div className="relative -mx-4 sm:-mx-6 px-4 sm:px-6">
+          <div className="relative flex gap-6 overflow-x-auto py-8 sm:py-10 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-border hover:scrollbar-thumb-muted-foreground/30">
+            {experience.map((job, index) => (
+              <motion.article
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ duration: 0.4, delay: index * 0.08 }}
+                className="group relative flex w-[min(100%,340px)] min-w-[300px] shrink-0 snap-center snap-always"
+              >
+                {/* Timeline label — date range above the card */}
+                <div className="absolute -top-6 left-0 right-0 flex justify-center">
+                  <span className="rounded-full border border-accent/60 bg-background px-3 py-1 text-xs font-medium text-accent shadow-sm">
+                    {job.duration}
+                  </span>
+                </div>
 
-                <div className="flex-1 space-y-1">
-                  <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
-                    <div>
-                      <h3 className="text-xl font-semibold text-foreground">
+                {/* Card */}
+                <div className="mt-4 flex h-full min-h-[280px] flex-col rounded-2xl border border-border bg-card/80 p-5 shadow-lg backdrop-blur-sm transition-all hover:border-accent/40 hover:shadow-xl">
+                  <div className="flex items-start gap-3">
+                    <div className="h-11 w-11 shrink-0 overflow-hidden rounded-xl border border-border bg-card flex items-center justify-center">
+                      {job.logo ? (
+                        <Image
+                          src={job.logo}
+                          alt={job.logoAlt ?? `${job.company} logo`}
+                          width={44}
+                          height={44}
+                          className="h-full w-full object-contain"
+                        />
+                      ) : (
+                        <span className="text-sm font-semibold text-accent">
+                          {job.company
+                            .split(" ")
+                            .map((word) => word[0])
+                            .join("")
+                            .slice(0, 3)}
+                        </span>
+                      )}
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <h3 className="font-semibold text-foreground truncate">
                         {job.role}
                       </h3>
-                      <p className="text-accent font-medium">{job.company}</p>
-                    </div>
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground shrink-0">
-                      <Briefcase size={16} />
-                      <span>{job.duration}</span>
+                      <p className="flex items-center gap-1 text-sm font-medium text-accent truncate">
+                        <span className="truncate">{job.company}</span>
+                        {job.country && (
+                          <span className="inline-flex items-center gap-1 rounded-full bg-accent/10 px-2 py-0.5 text-[11px] font-semibold text-accent">
+                            <span aria-hidden>{job.countryFlag ?? ""}</span>
+                            <span className="hidden sm:inline">{job.country}</span>
+                          </span>
+                        )}
+                      </p>
                     </div>
                   </div>
 
                   {(job.location || job.remote) && (
-                    <div className="mt-1 flex items-center gap-1 text-sm text-muted-foreground">
-                      <MapPin size={14} />
+                    <div className="mt-3 flex items-center gap-1.5 text-xs text-muted-foreground">
+                      <MapPin size={12} className="shrink-0" />
                       <span>
                         {job.location}
                         {job.remote ? " · Remote" : ""}
@@ -56,21 +85,48 @@ export function ExperienceSection() {
                     </div>
                   )}
 
-                  <ul className="mt-3 space-y-2">
+                  <ul className="mt-4 flex-1 space-y-2">
                     {job.achievements.map((achievement, i) => (
                       <li
                         key={i}
                         className="flex gap-2 text-muted-foreground text-sm leading-relaxed"
                       >
-                        <span className="text-accent shrink-0">•</span>
+                        <ChevronRight
+                          size={14}
+                          className="mt-0.5 shrink-0 text-accent"
+                          aria-hidden
+                        />
                         <span>{achievement}</span>
                       </li>
                     ))}
                   </ul>
+
+                  {job.technologies && job.technologies.length > 0 && (
+                    <div className="mt-4 flex flex-wrap gap-1.5 pt-3 border-t border-border/60">
+                      {job.technologies.map((tech) => (
+                        <span
+                          key={tech.name}
+                          className="rounded-md px-2 py-0.5 text-xs font-medium"
+                          style={{
+                            backgroundColor: `${tech.color}22`,
+                            color: tech.textLight ? "#fff" : tech.color,
+                            borderWidth: 1,
+                            borderStyle: "solid",
+                            borderColor: `${tech.color}44`,
+                          }}
+                        >
+                          {tech.name}
+                        </span>
+                      ))}
+                    </div>
+                  )}
                 </div>
-              </div>
-            </Card>
-          ))}
+              </motion.article>
+            ))}
+
+            {/* Right padding for last card */}
+            <div className="h-1 w-4 shrink-0 sm:w-6" aria-hidden />
+          </div>
         </div>
       </div>
     </section>
