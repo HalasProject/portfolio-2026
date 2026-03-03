@@ -165,6 +165,13 @@ export default function HeroCanvas() {
           border-radius: 50%;
           pointer-events: none;
         }
+        .hero-scroll-hint {
+          animation: scrollHintBounce 2s ease-in-out infinite;
+        }
+        @keyframes scrollHintBounce {
+          0%, 100% { transform: translateY(0); opacity: 0.7; }
+          50% { transform: translateY(6px); opacity: 1; }
+        }
       `}</style>
 
       {/* Base gradient background */}
@@ -366,7 +373,7 @@ export default function HeroCanvas() {
 
       {/* Bottom: tagline + CTA — mobile: socials + short description + Let's Talk centered; desktop: right-aligned with tagline */}
       <div
-        className={`fade-in absolute bottom-10 left-0 right-0 z-30 flex flex-col items-center justify-center px-4 pb-[max(1rem,env(safe-area-inset-bottom))] md:bottom-16 md:pb-0 md:left-auto md:right-8 md:items-end md:max-w-[300px] md:px-0 ${loaded ? "visible" : ""}`}
+        className={`fade-in absolute bottom-16 left-0 right-0 z-30 flex flex-col items-center justify-center px-4 pb-[max(1rem,env(safe-area-inset-bottom))] md:bottom-16 md:pb-0 md:left-auto md:right-8 md:items-end md:max-w-[300px] md:px-0 ${loaded ? "visible" : ""}`}
         style={{ transitionDelay: "0.5s" }}
       >
         {/* Mobile-only: social buttons above tagline */}
@@ -458,6 +465,30 @@ export default function HeroCanvas() {
           </span>
         </a>
       </div>
+
+      {/* Scroll hint — center bottom */}
+      <a
+        href="#about"
+        className="hero-scroll-hint absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-1 text-white/70 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-white/50 rounded-full p-2 md:bottom-6"
+        aria-label="Scroll to content"
+      >
+        <span className="text-[10px] uppercase tracking-widest font-medium body-text">
+          About me
+        </span>
+        <svg
+          width="20"
+          height="20"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2.5"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          aria-hidden
+        >
+          <path d="M12 5v14M19 12l-7 7-7-7" />
+        </svg>
+      </a>
     </section>
   );
 }
