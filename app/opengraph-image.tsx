@@ -1,5 +1,6 @@
 import { ImageResponse } from "next/og";
 
+export const runtime = "nodejs";
 export const alt = "Salah | Software Engineer — Full-stack developer portfolio";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
@@ -66,6 +67,12 @@ export default async function Image() {
         </div>
       </div>
     ),
-    { ...size }
+    {
+      ...size,
+      headers: {
+        "Cache-Control": "public, max-age=86400, immutable",
+        "Content-Type": "image/png",
+      },
+    }
   );
 }

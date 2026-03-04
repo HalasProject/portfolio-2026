@@ -30,12 +30,21 @@ export const metadata: Metadata = {
     type: "website",
     url: "https://www.salah.cloud",
     siteName: "Salah",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Salah | Software Engineer — Full-stack developer portfolio",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Salah | Software Engineer",
     description:
       "Full-stack Software Engineer — React, Next.js & TypeScript. Explore projects, experience, and connect.",
+    images: ["/og-image.png"],
   },
   icons: {
     icon: "/favicon.svg",
