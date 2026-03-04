@@ -20,21 +20,22 @@ export const metadata: Metadata = {
     template: "%s | Salah",
   },
   description:
-    "Personal portfolio of Salah — Software Engineer. Projects, experience, and contact.",
-  keywords: ["Salah", "Software Engineer", "portfolio", "React", "Next.js", "TypeScript"],
+    "Full-stack Software Engineer — React, Next.js & TypeScript. Explore projects, experience, and connect.",
+  keywords: ["Salah", "Software Engineer", "portfolio", "React", "Next.js", "TypeScript", "full-stack"],
   authors: [{ name: "Salah" }],
   openGraph: {
     title: "Salah | Software Engineer",
     description:
-      "Personal portfolio of Salah — Software Engineer. Projects, experience, and contact.",
+      "Full-stack Software Engineer — React, Next.js & TypeScript. Explore projects, experience, and connect.",
     type: "website",
     url: "https://www.salah.cloud",
+    siteName: "Salah",
   },
   twitter: {
     card: "summary_large_image",
     title: "Salah | Software Engineer",
     description:
-      "Personal portfolio of Salah — Software Engineer. Projects, experience, and contact.",
+      "Full-stack Software Engineer — React, Next.js & TypeScript. Explore projects, experience, and connect.",
   },
   icons: {
     icon: "/favicon.svg",
