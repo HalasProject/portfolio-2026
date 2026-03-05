@@ -21,8 +21,9 @@ export function Footer() {
           <a
             href={`mailto:${socials.email}`}
             className="flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors"
+            aria-label={`Email: ${socials.email}`}
           >
-            <Mail size={18} />
+            <Mail size={18} aria-hidden />
             <span>{socials.email}</span>
           </a>
           <div className="flex items-center gap-4">
@@ -35,7 +36,7 @@ export function Footer() {
                 className="text-muted-foreground hover:text-accent transition-colors"
                 aria-label={label}
               >
-                <Icon size={20} />
+                <Icon size={20} aria-hidden />
               </a>
             ))}
           </div>

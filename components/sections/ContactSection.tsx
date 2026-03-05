@@ -93,6 +93,9 @@ export function ContactSection() {
 
             {result && (
               <div
+                role="status"
+                aria-live="polite"
+                aria-atomic="true"
                 className={`rounded-xl px-4 py-3 text-sm ${result.success
                     ? "bg-green-500/10 text-green-600 dark:text-green-400 border border-green-500/20"
                     : "bg-red-500/10 text-red-600 dark:text-red-400 border border-red-500/20"
@@ -107,6 +110,7 @@ export function ContactSection() {
               variant="primary"
               className="w-full gap-2"
               disabled={isPending}
+              aria-busy={isPending}
             >
               {isPending ? (
                 <>

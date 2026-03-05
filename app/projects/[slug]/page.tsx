@@ -45,7 +45,7 @@ export default async function ProjectPage({
     <>
       <ScrollProgressBar />
       <FloatingSocials />
-      <main className="min-h-screen">
+      <main id="main-content" className="min-h-screen">
         <div className="container mx-auto px-4 sm:px-6 py-12 sm:py-20">
           <BackToProjectsLink href="/#projects" />
 

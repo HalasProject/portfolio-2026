@@ -21,8 +21,9 @@ export function ProjectCtas({ liveUrl, githubUrl }: Props) {
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center justify-center gap-2 rounded-xl px-5 py-2.5 font-medium bg-accent text-accent-foreground hover:bg-accent/90 transition-colors"
+          aria-label={`${t.projectPage.visitLive} (${t.opensInNewWindow})`}
         >
-          <ExternalLink size={18} />
+          <ExternalLink size={18} aria-hidden />
           {t.projectPage.visitLive}
         </a>
       )}
@@ -32,8 +33,9 @@ export function ProjectCtas({ liveUrl, githubUrl }: Props) {
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center justify-center gap-2 rounded-xl px-5 py-2.5 font-medium border-2 border-accent text-accent hover:bg-accent hover:text-accent-foreground transition-colors"
+          aria-label={`${t.projectPage.viewOnGithub} (${t.opensInNewWindow})`}
         >
-          <Github size={18} />
+          <Github size={18} aria-hidden />
           {t.projectPage.viewOnGithub}
         </a>
       )}

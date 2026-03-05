@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useRef } from "react";
 import Image from "next/image";
 import { X, ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -11,6 +11,8 @@ interface ProjectGalleryProps {
 
 export function ProjectGallery({ images, title }: ProjectGalleryProps) {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const previousFocusRef = useRef<HTMLElement | null>(null);
 
   const goPrev = useCallback(() => {
     setOpenIndex((i) => (i === null ? null : (i - 1 + images.length) % images.length));
@@ -20,7 +22,16 @@ export function ProjectGallery({ images, title }: ProjectGalleryProps) {
     setOpenIndex((i) => (i === null ? null : (i + 1) % images.length));
   }, [images.length]);
 
-  const close = useCallback(() => setOpenIndex(null), []);
+  const close = useCallback(() => {
+    setOpenIndex(null);
+    previousFocusRef.current?.focus();
+  }, []);
+
+  useEffect(() => {
+    if (openIndex === null) return;
+    previousFocusRef.current = document.activeElement as HTMLElement | null;
+    closeButtonRef.current?.focus();
+  }, [openIndex]);
 
   useEffect(() => {
     if (openIndex === null) return;
@@ -50,6 +61,7 @@ export function ProjectGallery({ images, title }: ProjectGalleryProps) {
               type="button"
               onClick={() => setOpenIndex(i)}
               className="relative aspect-video rounded-xl overflow-hidden bg-muted shadow-md cursor-pointer hover:ring-2 hover:ring-accent/50 focus:outline-none focus:ring-2 focus:ring-accent transition-all"
+              aria-label={`View ${title} screenshot ${i + 1} of ${images.length}`}
             >
               <Image
                 src={src}
@@ -71,30 +83,31 @@ export function ProjectGallery({ images, title }: ProjectGalleryProps) {
           aria-label="Image gallery"
         >
           <button
+            ref={closeButtonRef}
             type="button"
             onClick={close}
-            className="absolute top-4 right-4 z-10 rounded-full p-2 text-white/90 hover:bg-white/10 hover:text-white transition-colors"
-            aria-label="Close"
+            className="absolute top-4 right-4 z-10 rounded-full p-2 text-white/90 hover:bg-white/10 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-white"
+            aria-label="Close gallery"
           >
-            <X size={24} />
+            <X size={24} aria-hidden />
           </button>
 
           <button
             type="button"
             onClick={goPrev}
-            className="absolute left-4 top-1/2 -translate-y-1/2 z-10 rounded-full p-2 text-white/90 hover:bg-white/10 hover:text-white transition-colors"
+            className="absolute left-4 top-1/2 -translate-y-1/2 z-10 rounded-full p-2 text-white/90 hover:bg-white/10 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-white"
             aria-label="Previous image"
           >
-            <ChevronLeft size={32} />
+            <ChevronLeft size={32} aria-hidden />
           </button>
 
           <button
             type="button"
             onClick={goNext}
-            className="absolute right-4 top-1/2 -translate-y-1/2 z-10 rounded-full p-2 text-white/90 hover:bg-white/10 hover:text-white transition-colors"
+            className="absolute right-4 top-1/2 -translate-y-1/2 z-10 rounded-full p-2 text-white/90 hover:bg-white/10 hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-white"
             aria-label="Next image"
           >
-            <ChevronRight size={32} />
+            <ChevronRight size={32} aria-hidden />
           </button>
 
           <div

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { LanguageProvider } from "@/components/providers/LanguageProvider";
+import { LangSync } from "@/components/a11y/LangSync";
 import "./globals.css";
 import "./hero.css";
 
@@ -74,7 +75,10 @@ export default function RootLayout({
           Skip to main content
         </a>
         <ThemeProvider>
-          <LanguageProvider>{children}</LanguageProvider>
+          <LanguageProvider>
+            <LangSync />
+            {children}
+          </LanguageProvider>
         </ThemeProvider>
       </body>
     </html>

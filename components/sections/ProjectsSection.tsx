@@ -73,8 +73,9 @@ export function ProjectsSection() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1 text-sm font-medium text-accent hover:underline"
+                    aria-label={`${t.projects.liveLabel} (${t.opensInNewWindow})`}
                   >
-                    <ExternalLink size={16} />
+                    <ExternalLink size={16} aria-hidden />
                     {t.projects.liveLabel}
                   </a>
                 )}
@@ -84,8 +85,9 @@ export function ProjectsSection() {
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1 text-sm font-medium text-accent hover:underline"
+                    aria-label={`${t.projects.githubLabel} (${t.opensInNewWindow})`}
                   >
-                    <Github size={16} />
+                    <Github size={16} aria-hidden />
                     {t.projects.githubLabel}
                   </a>
                 )}

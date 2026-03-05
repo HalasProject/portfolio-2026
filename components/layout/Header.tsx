@@ -33,7 +33,7 @@ export function Header() {
           {personal.name}
         </Link>
 
-        <nav className="hidden md:flex items-center gap-8">
+        <nav className="hidden md:flex items-center gap-8" aria-label="Main navigation">
           {navLinks.map((link) => (
             <a
               key={link.href}
@@ -55,11 +55,14 @@ export function Header() {
                   ? "text-foreground"
                   : "text-muted-foreground hover:text-foreground"
               }`}
-              aria-label={t.switcherAriaLabel}
+              aria-label={t.languageEnLabel}
+              aria-pressed={language === "en"}
             >
               EN
             </button>
-            <span className="text-muted-foreground/60">/</span>
+            <span className="text-muted-foreground/60" aria-hidden>
+              /
+            </span>
             <button
               type="button"
               onClick={() => setLanguage("fr")}
@@ -68,6 +71,8 @@ export function Header() {
                   ? "text-foreground"
                   : "text-muted-foreground hover:text-foreground"
               }`}
+              aria-label={t.languageFrLabel}
+              aria-pressed={language === "fr"}
             >
               FR
             </button>
@@ -76,7 +81,7 @@ export function Header() {
             type="button"
             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
             className="rounded-lg p-2 text-muted-foreground hover:text-foreground hover:bg-muted transition-colors"
-            aria-label="Toggle theme"
+            aria-label={t.themeToggleAriaLabel}
           >
             {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
           </button>
@@ -85,7 +90,9 @@ export function Header() {
             type="button"
             className="md:hidden rounded-lg p-2 text-muted-foreground hover:text-foreground"
             onClick={() => setOpen(!open)}
-            aria-label="Toggle menu"
+            aria-label={open ? t.closeMenu : t.openMenu}
+            aria-expanded={open}
+            aria-controls="mobile-nav"
           >
             {open ? <X size={24} /> : <Menu size={24} />}
           </button>
@@ -95,6 +102,9 @@ export function Header() {
       <AnimatePresence>
         {open && (
           <motion.div
+            id="mobile-nav"
+            role="navigation"
+            aria-label="Mobile navigation"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
@@ -120,10 +130,14 @@ export function Header() {
                       ? "text-foreground"
                       : "text-muted-foreground"
                   }`}
+                  aria-label={t.languageEnLabel}
+                  aria-pressed={language === "en"}
                 >
                   EN
                 </button>
-                <span className="text-muted-foreground/60">/</span>
+                <span className="text-muted-foreground/60" aria-hidden>
+                  /
+                </span>
                 <button
                   type="button"
                   onClick={() => setLanguage("fr")}
@@ -132,6 +146,8 @@ export function Header() {
                       ? "text-foreground"
                       : "text-muted-foreground"
                   }`}
+                  aria-label={t.languageFrLabel}
+                  aria-pressed={language === "fr"}
                 >
                   FR
                 </button>

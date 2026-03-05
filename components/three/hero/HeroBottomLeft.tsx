@@ -34,6 +34,7 @@ export function HeroBottomLeft({
     >
       <div
         className="mb-3 inline-flex items-center gap-1 rounded-full border border-white/20 bg-black/30 px-3 py-1 text-[11px] text-white/80"
+        role="group"
         aria-label={t.switcherAriaLabel}
       >
         <button
@@ -43,10 +44,14 @@ export function HeroBottomLeft({
             ? "text-white"
             : "text-white/60 hover:text-white/90"
             }`}
+          aria-label={t.languageEnLabel}
+          aria-pressed={language === "en"}
         >
           EN 🇺🇸
         </button>
-        <span className="text-white/50">/</span>
+        <span className="text-white/50" aria-hidden>
+          /
+        </span>
         <button
           type="button"
           onClick={() => setLanguage("fr")}
@@ -54,6 +59,8 @@ export function HeroBottomLeft({
             ? "text-white"
             : "text-white/60 hover:text-white/90"
             }`}
+          aria-label={t.languageFrLabel}
+          aria-pressed={language === "fr"}
         >
           FR 🇫🇷
         </button>

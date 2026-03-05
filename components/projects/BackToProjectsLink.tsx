@@ -16,7 +16,7 @@ export function BackToProjectsLink({ href }: Props) {
       href={href}
       className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-8"
     >
-      <ArrowLeft size={18} />
+      <ArrowLeft size={18} aria-hidden />
       {t.projectPage.backToProjects}
     </Link>
   );

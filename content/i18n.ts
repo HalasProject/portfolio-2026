@@ -6,7 +6,13 @@ export const messages = {
   en: {
     languageLabelShort: "EN",
     languageLabelFull: "English",
+    languageEnLabel: "English",
+    languageFrLabel: "French",
     switcherAriaLabel: "Switch language",
+    themeToggleAriaLabel: "Toggle dark mode",
+    opensInNewWindow: "opens in new window",
+    openMenu: "Open menu",
+    closeMenu: "Close menu",
     nav: {
       home: "Home",
       about: "About",
@@ -40,6 +46,8 @@ export const messages = {
       keyContributionsHeading: "Key Contributions",
       businessImpactHeading: "Business Impact",
       remoteSuffix: " · Remote",
+      viewDetails: "View details",
+      showLess: "Show less",
     },
     projects: {
       title: "Projects",
@@ -72,7 +80,13 @@ export const messages = {
   fr: {
     languageLabelShort: "FR",
     languageLabelFull: "Français",
+    languageEnLabel: "Anglais",
+    languageFrLabel: "Français",
     switcherAriaLabel: "Changer de langue",
+    themeToggleAriaLabel: "Changer de thème (clair/sombre)",
+    opensInNewWindow: "ouvre dans un nouvel onglet",
+    openMenu: "Ouvrir le menu",
+    closeMenu: "Fermer le menu",
     nav: {
       home: "Accueil",
       about: "À propos",
@@ -107,6 +121,8 @@ export const messages = {
       keyContributionsHeading: "Contributions clés",
       businessImpactHeading: "Impact métier",
       remoteSuffix: " · À distance",
+      viewDetails: "Voir les détails",
+      showLess: "Réduire",
     },
     projects: {
       title: "Projets",

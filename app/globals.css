@@ -49,9 +49,11 @@ body {
   font-family: var(--font-sans), system-ui, sans-serif;
 }
 
-/* Smooth scroll */
-html {
-  scroll-behavior: smooth;
+/* Smooth scroll (respect reduced motion) */
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
 }
 
 /* Section snap scrolling for nicer transitions between hero / about / experience / projects / contact */
@@ -108,4 +110,15 @@ main#main-content > section {
   overflow: visible;
   clip: auto;
   white-space: normal;
+}
+
+/* Respect reduced motion for animations */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
