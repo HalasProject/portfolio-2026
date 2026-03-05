@@ -4,16 +4,108 @@ import Image from "next/image";
 import { useEffect, useState, useRef, useCallback } from "react";
 import { personal } from "@/content/personal";
 import { socials } from "@/content/socials";
-import { Linkedin, Send } from "lucide-react";
+import { Linkedin, ChevronLeft, ChevronRight } from "lucide-react";
 
 const SMALL_SCREEN_BREAKPOINT = 768;
+
+const EXPRESSIONS = [
+  { src: "/normal.png", label: "Normal" },
+  { src: "/angry.png", label: "Angry" },
+  { src: "/confident.png", label: "Confident" },
+  { src: "/geeky.png", label: "Geeky" },
+  { src: "/surprise.png", label: "Surprise" },
+  { src: "/tongue.png", label: "Tongue" },
+  { src: "/wink.png", label: "Wink" },
+] as const;
+
+// Infinite carousel: [cloneLast, ...all, cloneFirst] so we can loop without visible jump
+const INFINITE_SLIDES = [
+  EXPRESSIONS[EXPRESSIONS.length - 1],
+  ...EXPRESSIONS,
+  EXPRESSIONS[0],
+];
+const REAL_START_INDEX = 1; // first real slide in INFINITE_SLIDES
+const REAL_END_INDEX = EXPRESSIONS.length; // last real slide (7)
+
+const SWIPE_THRESHOLD_PX = 50;
 
 export default function HeroCanvas() {
   const [loaded, setLoaded] = useState(false);
   const [fontSize, setFontSize] = useState(160);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
+  const [expressionIndex, setExpressionIndex] = useState(REAL_START_INDEX);
+  const trackRef = useRef<HTMLDivElement>(null);
   const nameRef = useRef<HTMLDivElement>(null);
   const measureRef = useRef<HTMLDivElement>(null);
+  const isAnimatingRef = useRef(false);
+  const touchStartRef = useRef<{ x: number; y: number } | null>(null);
+
+  const handleTrackTransitionEnd = useCallback(() => {
+    setExpressionIndex((current) => {
+      const track = trackRef.current;
+      if (!track) return current;
+
+      if (current === INFINITE_SLIDES.length - 1) {
+        // Landed on clone of first → jump back to real first (no animation)
+        track.style.transition = "none";
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            if (trackRef.current) trackRef.current.style.transition = "";
+            isAnimatingRef.current = false;
+          });
+        });
+        return REAL_START_INDEX;
+      }
+      if (current === 0) {
+        // Landed on clone of last → jump back to real last (no animation)
+        track.style.transition = "none";
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            if (trackRef.current) trackRef.current.style.transition = "";
+            isAnimatingRef.current = false;
+          });
+        });
+        return REAL_END_INDEX;
+      }
+      isAnimatingRef.current = false;
+      return current;
+    });
+  }, []);
+
+  const goPrev = useCallback(() => {
+    if (isAnimatingRef.current) return;
+    isAnimatingRef.current = true;
+    setExpressionIndex((i) => Math.max(0, i - 1));
+  }, []);
+
+  const goNext = useCallback(() => {
+    if (isAnimatingRef.current) return;
+    isAnimatingRef.current = true;
+    setExpressionIndex((i) => Math.min(INFINITE_SLIDES.length - 1, i + 1));
+  }, []);
+
+  const handleTouchStart = useCallback((e: React.TouchEvent) => {
+    touchStartRef.current = {
+      x: e.touches[0].clientX,
+      y: e.touches[0].clientY,
+    };
+  }, []);
+
+  const handleTouchEnd = useCallback(
+    (e: React.TouchEvent) => {
+      const start = touchStartRef.current;
+      touchStartRef.current = null;
+      if (!start || isAnimatingRef.current) return;
+      const end = e.changedTouches[0];
+      const deltaX = end.clientX - start.x;
+      const deltaY = end.clientY - start.y;
+      if (Math.abs(deltaX) < SWIPE_THRESHOLD_PX) return;
+      if (Math.abs(deltaX) < Math.abs(deltaY)) return; // vertical scroll wins
+      if (deltaX > 0) goPrev();
+      else goNext();
+    },
+    [goPrev, goNext]
+  );
 
   const fitNameToWidth = useCallback(() => {
     if (!measureRef.current || !nameRef.current) return;
@@ -42,6 +134,11 @@ export default function HeroCanvas() {
   useEffect(() => {
     setTimeout(() => setLoaded(true), 100);
   }, []);
+
+  useEffect(() => {
+    const interval = setInterval(goNext, 5000);
+    return () => clearInterval(interval);
+  }, [goNext]);
 
   useEffect(() => {
     const mq = window.matchMedia(`(max-width: ${SMALL_SCREEN_BREAKPOINT - 1}px)`);
@@ -128,6 +225,45 @@ export default function HeroCanvas() {
           opacity: 1;
           transform: translateX(-50%) translateY(0);
         }
+        .expression-track {
+          display: flex;
+          width: 900%;
+          transition: transform 0.5s cubic-bezier(0.32, 0.72, 0, 1);
+        }
+        .expression-track .expression-slide {
+          flex: 0 0 11.111111%;
+          width: 11.111111%;
+          display: flex;
+          align-items: flex-end;
+          justify-content: center;
+        }
+        .expression-btn {
+          position: absolute;
+          top: 50%;
+          transform: translateY(-50%);
+          z-index: 25;
+          width: 44px;
+          height: 44px;
+          border-radius: 50%;
+          background: rgba(124, 58, 237, 0.9);
+          border: 1px solid rgba(255,255,255,0.2);
+          color: white;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          transition: background 0.2s, transform 0.15s ease, box-shadow 0.2s;
+        }
+        .expression-btn:hover {
+          background: rgba(109, 40, 217, 1);
+          transform: translateY(-50%) scale(1.08);
+          box-shadow: 0 4px 20px rgba(124, 58, 237, 0.5);
+        }
+        .expression-btn:active {
+          transform: translateY(-50%) scale(0.92);
+        }
+        .expression-btn.left { left: 8px; }
+        .expression-btn.right { right: 8px; }
         .social-btn {
           width: 44px;
           height: 44px;
@@ -263,7 +399,7 @@ export default function HeroCanvas() {
         </div>
       </div>
 
-      {/* Photo — center, z above name. Mobile: slightly higher; desktop: bottom 0 */}
+      {/* Photo — center, z above name. Expression slider with left/right buttons */}
       <div
         className={`hero-photo bottom-[9em] md:bottom-0 ${loaded ? "visible" : ""}`}
         style={{
@@ -277,22 +413,66 @@ export default function HeroCanvas() {
           justifyContent: "center",
         }}
       >
+        <button
+          type="button"
+          className="expression-btn left"
+          onClick={goPrev}
+          aria-label="Previous expression"
+        >
+          <ChevronLeft size={24} strokeWidth={2.5} />
+        </button>
+
         <div
-          className="w-full h-full flex items-end justify-center"
+          className="flex-1 h-full overflow-hidden touch-pan-y"
           style={{
+            minWidth: 0,
             maskImage: "linear-gradient(to top, transparent 0%, black 8%)",
             WebkitMaskImage:
               "linear-gradient(to top, transparent 0%, black 8%)",
+            touchAction: "pan-y",
           }}
+          onTouchStart={handleTouchStart}
+          onTouchEnd={handleTouchEnd}
         >
-          <Image
-            src="/me-removebg-preview-2.png"
-            alt={personal.name}
-            width={480}
-            height={640}
-            className="h-full w-auto object-contain object-bottom"
-          />
+          <div
+            ref={trackRef}
+            className="expression-track h-full"
+            style={{
+              transform: `translateX(-${expressionIndex * (100 / INFINITE_SLIDES.length)}%)`,
+            }}
+            onTransitionEnd={handleTrackTransitionEnd}
+          >
+            {INFINITE_SLIDES.map(({ src, label }, i) => (
+              <div key={`${src}-${i}`} className="expression-slide h-full">
+                <div
+                  className="w-full h-full flex items-end justify-center"
+                  style={{
+                    maskImage: "linear-gradient(to top, transparent 0%, black 8%)",
+                    WebkitMaskImage:
+                      "linear-gradient(to top, transparent 0%, black 8%)",
+                  }}
+                >
+                  <Image
+                    src={src}
+                    alt={`${personal.name} - ${label}`}
+                    width={480}
+                    height={640}
+                    className="h-full w-auto object-contain object-bottom"
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
+
+        <button
+          type="button"
+          className="expression-btn right"
+          onClick={goNext}
+          aria-label="Next expression"
+        >
+          <ChevronRight size={24} strokeWidth={2.5} />
+        </button>
       </div>
 
       {/* Bottom-left: description + socials — hidden on small screens */}

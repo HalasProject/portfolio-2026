@@ -19,9 +19,9 @@ export function ExperienceSection() {
           subtitle="Where I've worked and what I've delivered."
         />
 
-        {/* Horizontal scrollable cards */}
+        {/* Experience cards — vertical on mobile, horizontal carousel on larger screens */}
         <div className="relative -mx-4 sm:-mx-6 px-4 sm:px-6">
-          <div className="relative flex gap-6 overflow-x-auto py-8 sm:py-10 scrollbar-thin scrollbar-track-transparent scrollbar-thumb-border hover:scrollbar-thumb-muted-foreground/30">
+          <div className="relative flex flex-col gap-6 py-8 sm:py-10 sm:flex-row sm:overflow-x-auto sm:snap-x sm:snap-mandatory scrollbar-thin scrollbar-track-transparent scrollbar-thumb-border hover:scrollbar-thumb-muted-foreground/30">
             {experience.map((job, index) => (
               <motion.article
                 key={index}
@@ -29,7 +29,7 @@ export function ExperienceSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-50px" }}
                 transition={{ duration: 0.4, delay: index * 0.08 }}
-                className="group relative flex w-[min(100%,340px)] min-w-[300px] shrink-0 snap-center snap-always"
+                className="group relative flex w-full sm:w-[min(100%,340px)] sm:min-w-[300px] shrink-0 sm:snap-center sm:snap-always"
               >
                 {/* Timeline label — date range above the card */}
                 <div className="absolute -top-6 left-0 right-0 flex justify-center">

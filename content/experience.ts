@@ -157,27 +157,27 @@ export const experience: ExperienceItem[] = [
       { name: "MySQL", color: "#4479a1" },
     ],
   },
-  {
-    role: "Webmaster",
-    company: "Le Libre Pinceau",
-    duration: "Dec 2016 – Oct 2018",
-    country: "Algeria",
-    countryFlag: "🇩🇿",
-    keyContributions: [
-      "Managed and optimized website content across CMS platforms.",
-      "Ensured cross-device responsiveness (desktop, tablet, mobile).",
-      "Maintained uptime through structured updates, backups, and monitoring.",
-      "Applied UX improvements based on competitive research and user behavior.",
-    ],
-    businessImpact: [
-      "Improved site stability and consistency.",
-      "Strengthened online presence through better user experience.",
-      "Built foundational experience in ownership and long-term maintenance.",
-    ],
-    technologies: [
-      { name: "Joomla", color: "#5091cd" },
-      { name: "WordPress", color: "#21759b" },
-      { name: "Photoshop", color: "#31a8ff" },
-    ],
-  },
+  // {
+  //   role: "Webmaster",
+  //   company: "Le Libre Pinceau",
+  //   duration: "Dec 2016 – Oct 2018",
+  //   country: "Algeria",
+  //   countryFlag: "🇩🇿",
+  //   keyContributions: [
+  //     "Managed and optimized website content across CMS platforms.",
+  //     "Ensured cross-device responsiveness (desktop, tablet, mobile).",
+  //     "Maintained uptime through structured updates, backups, and monitoring.",
+  //     "Applied UX improvements based on competitive research and user behavior.",
+  //   ],
+  //   businessImpact: [
+  //     "Improved site stability and consistency.",
+  //     "Strengthened online presence through better user experience.",
+  //     "Built foundational experience in ownership and long-term maintenance.",
+  //   ],
+  //   technologies: [
+  //     { name: "Joomla", color: "#5091cd" },
+  //     { name: "WordPress", color: "#21759b" },
+  //     { name: "Photoshop", color: "#31a8ff" },
+  //   ],
+  // },
 ];
