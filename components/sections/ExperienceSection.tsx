@@ -5,8 +5,11 @@ import { motion } from "framer-motion";
 import { MapPin, ChevronRight } from "lucide-react";
 import { experience } from "@/content/experience";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { useTranslations } from "@/components/i18n/useTranslations";
 
 export function ExperienceSection() {
+  const { t } = useTranslations();
+
   return (
     <section
       id="experience"
@@ -15,8 +18,8 @@ export function ExperienceSection() {
     >
       <div className="container mx-auto px-4 sm:px-6">
         <SectionHeader
-          title="Experience"
-          subtitle="Where I've worked and what I've delivered."
+          title={t.experience.title}
+          subtitle={t.experience.subtitle}
         />
 
         {/* Experience cards — vertical on mobile, horizontal carousel on larger screens */}
@@ -81,7 +84,7 @@ export function ExperienceSection() {
                       <MapPin size={12} className="shrink-0" />
                       <span>
                         {job.location}
-                        {job.remote ? " · Remote" : ""}
+                        {job.remote ? t.experience.remoteSuffix : ""}
                       </span>
                     </div>
                   )}
@@ -89,7 +92,7 @@ export function ExperienceSection() {
                   <div className="mt-4 flex-1 space-y-3">
                     <div>
                       <p className="mb-1.5 text-xs font-semibold uppercase tracking-wider text-accent/90">
-                        Key Contributions
+                        {t.experience.keyContributionsHeading}
                       </p>
                       <ul className="space-y-1.5">
                         {job.keyContributions.map((item, i) => (
@@ -110,7 +113,7 @@ export function ExperienceSection() {
                     {job.businessImpact && job.businessImpact.length > 0 && (
                       <div>
                         <p className="mb-1.5 text-xs font-semibold uppercase tracking-wider text-accent/90">
-                          Business Impact
+                          {t.experience.businessImpactHeading}
                         </p>
                         <ul className="space-y-1.5">
                           {job.businessImpact.map((item, i) => (

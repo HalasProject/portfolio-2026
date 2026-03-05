@@ -6,6 +6,7 @@ import { ProjectsSection } from "@/components/sections/ProjectsSection";
 import { ContactSection } from "@/components/sections/ContactSection";
 import { ScrollProgressBar } from "@/components/ui/ScrollProgressBar";
 import { FloatingSocials } from "@/components/ui/FloatingSocials";
+import { MobileLanguageSwitcher } from "@/components/ui/MobileLanguageSwitcher";
 import HeroCanvas from "@/components/three/HeroCanvas";
 import { ScrollEffects } from "@/components/layout/ScrollEffects";
 
@@ -14,6 +15,7 @@ export default function Home() {
     <>
       <ScrollProgressBar />
       <FloatingSocials />
+      <MobileLanguageSwitcher />
       <ScrollEffects />
       <main id="main-content">
         <HeroCanvas />

@@ -6,18 +6,22 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Sun, Moon } from "lucide-react";
 import { useTheme } from "next-themes";
 import { personal } from "@/content/personal";
-
-const navLinks = [
-  { href: "#home", label: "Home" },
-  { href: "#about", label: "About" },
-  { href: "#experience", label: "Experience" },
-  { href: "#projects", label: "Projects" },
-  { href: "#contact", label: "Contact" },
-];
+import { useTranslations } from "@/components/i18n/useTranslations";
+import { useLanguage } from "@/components/providers/LanguageProvider";
 
 export function Header() {
   const [open, setOpen] = useState(false);
   const { theme, setTheme } = useTheme();
+  const { t } = useTranslations();
+  const { language, setLanguage } = useLanguage();
+
+  const navLinks = [
+    { href: "#home", label: t.nav.home },
+    { href: "#about", label: t.nav.about },
+    { href: "#experience", label: t.nav.experience },
+    { href: "#projects", label: t.nav.projects },
+    { href: "#contact", label: t.nav.contact },
+  ];
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-md">
@@ -42,6 +46,32 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-2">
+          <div className="hidden md:inline-flex items-center gap-1 rounded-full border border-border/60 bg-muted/40 px-2 py-1 text-xs font-medium text-muted-foreground">
+            <button
+              type="button"
+              onClick={() => setLanguage("en")}
+              className={`px-1.5 transition-colors ${
+                language === "en"
+                  ? "text-foreground"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+              aria-label={t.switcherAriaLabel}
+            >
+              EN
+            </button>
+            <span className="text-muted-foreground/60">/</span>
+            <button
+              type="button"
+              onClick={() => setLanguage("fr")}
+              className={`px-1.5 transition-colors ${
+                language === "fr"
+                  ? "text-foreground"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              FR
+            </button>
+          </div>
           <button
             type="button"
             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
@@ -81,6 +111,31 @@ export function Header() {
                   {link.label}
                 </a>
               ))}
+              <div className="mt-2 flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={() => setLanguage("en")}
+                  className={`text-sm font-medium px-1 ${
+                    language === "en"
+                      ? "text-foreground"
+                      : "text-muted-foreground"
+                  }`}
+                >
+                  EN
+                </button>
+                <span className="text-muted-foreground/60">/</span>
+                <button
+                  type="button"
+                  onClick={() => setLanguage("fr")}
+                  className={`text-sm font-medium px-1 ${
+                    language === "fr"
+                      ? "text-foreground"
+                      : "text-muted-foreground"
+                  }`}
+                >
+                  FR
+                </button>
+              </div>
             </nav>
           </motion.div>
         )}

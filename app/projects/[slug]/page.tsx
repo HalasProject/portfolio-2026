@@ -2,10 +2,15 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ProjectImage } from "@/components/ui/ProjectImage";
 import { ProjectGallery } from "@/components/ui/ProjectGallery";
-import { ArrowLeft, ExternalLink, Github, Check } from "lucide-react";
+import { Check } from "lucide-react";
 import { getProjectBySlug, projects } from "@/content/projects";
 import { getProjectGalleryImages } from "@/lib/project-images";
 import { Footer } from "@/components/layout/Footer";
+import { FloatingSocials } from "@/components/ui/FloatingSocials";
+import { ScrollProgressBar } from "@/components/ui/ScrollProgressBar";
+import { BackToProjectsLink } from "@/components/projects/BackToProjectsLink";
+import { ProjectCtas } from "@/components/projects/ProjectCtas";
+import { FeaturesHeading } from "@/components/projects/FeaturesHeading";
 
 export async function generateStaticParams() {
   return projects.map((p) => ({ slug: p.slug }));
@@ -38,15 +43,11 @@ export default async function ProjectPage({
 
   return (
     <>
+      <ScrollProgressBar />
+      <FloatingSocials />
       <main className="min-h-screen">
         <div className="container mx-auto px-4 sm:px-6 py-12 sm:py-20">
-          <Link
-            href="/#projects"
-            className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-8"
-          >
-            <ArrowLeft size={18} />
-            Back to projects
-          </Link>
+          <BackToProjectsLink href="/#projects" />
 
           <article className="max-w-4xl mx-auto">
             {/* Hero image */}
@@ -379,7 +380,7 @@ export default async function ProjectPage({
 
             {project.features && project.features.length > 0 && (
               <section className="mb-10">
-                <h2 className="text-xl font-semibold mb-4">Features</h2>
+                <FeaturesHeading />
                 <ul className="space-y-3">
                   {project.features.map((feature) => (
                     <li
@@ -397,30 +398,10 @@ export default async function ProjectPage({
               </section>
             )}
 
-            <div className="flex flex-wrap gap-4 pt-6 border-t border-border">
-              {project.liveUrl && (
-                <a
-                  href={project.liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 rounded-xl px-5 py-2.5 font-medium bg-accent text-accent-foreground hover:bg-accent/90 transition-colors"
-                >
-                  <ExternalLink size={18} />
-                  Visit live site
-                </a>
-              )}
-              {project.githubUrl && (
-                <a
-                  href={project.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 rounded-xl px-5 py-2.5 font-medium border-2 border-accent text-accent hover:bg-accent hover:text-accent-foreground transition-colors"
-                >
-                  <Github size={18} />
-                  View on GitHub
-                </a>
-              )}
-            </div>
+            <ProjectCtas
+              liveUrl={project.liveUrl}
+              githubUrl={project.githubUrl}
+            />
           </article>
         </div>
       </main>

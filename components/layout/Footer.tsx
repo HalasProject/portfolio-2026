@@ -1,12 +1,13 @@
 import Link from "next/link";
-import { Mail, Github, Linkedin, MessageCircle, Send } from "lucide-react";
+import { Mail, Github, Linkedin, Send } from "lucide-react";
 import { socials } from "@/content/socials";
+import { WhatsappIcon } from "@/components/icons/WhatsappIcon";
 
 const socialLinks = [
   { href: socials.email, icon: Mail, label: "Email" },
   { href: socials.github, icon: Github, label: "GitHub" },
   { href: socials.linkedin, icon: Linkedin, label: "LinkedIn" },
-  { href: socials.whatsapp, icon: MessageCircle, label: "WhatsApp" },
+  { href: socials.whatsapp, icon: WhatsappIcon, label: "WhatsApp" },
   { href: socials.telegram, icon: Send, label: "Telegram" },
 ];
 

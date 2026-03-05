@@ -7,14 +7,17 @@ import { ExternalLink, Github } from "lucide-react";
 import { projects } from "@/content/projects";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Tag } from "@/components/ui/Tag";
+import { useTranslations } from "@/components/i18n/useTranslations";
 
 export function ProjectsSection() {
+  const { t } = useTranslations();
+
   return (
     <section id="projects" data-section className="py-20 sm:py-28">
       <div className="container mx-auto px-4 sm:px-6">
         <SectionHeader
-          title="Projects"
-          subtitle="A selection of things I've built."
+          title={t.projects.title}
+          subtitle={t.projects.subtitle}
         />
 
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
@@ -72,7 +75,7 @@ export function ProjectsSection() {
                     className="inline-flex items-center gap-1 text-sm font-medium text-accent hover:underline"
                   >
                     <ExternalLink size={16} />
-                    Live
+                    {t.projects.liveLabel}
                   </a>
                 )}
                 {project.githubUrl && (
@@ -83,14 +86,14 @@ export function ProjectsSection() {
                     className="inline-flex items-center gap-1 text-sm font-medium text-accent hover:underline"
                   >
                     <Github size={16} />
-                    GitHub
+                    {t.projects.githubLabel}
                   </a>
                 )}
                 <Link
                   href={`/projects/${project.slug}`}
                   className="inline-flex items-center gap-1 text-sm font-medium text-accent hover:underline ml-auto"
                 >
-                  View details →
+                  {t.projects.viewDetails}
                 </Link>
               </div>
             </motion.article>

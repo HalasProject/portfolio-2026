@@ -2,10 +2,12 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { MessageCircle, Send, Mail, FolderOpen, Download } from "lucide-react";
+import { Send, Mail, FolderOpen, Download } from "lucide-react";
 import { personal } from "@/content/personal";
 import { socials } from "@/content/socials";
 import { Button } from "@/components/ui/Button";
+import { useTranslations } from "@/components/i18n/useTranslations";
+import { WhatsappIcon } from "@/components/icons/WhatsappIcon";
 
 const container = {
   hidden: { opacity: 0, y: 20 },
@@ -22,6 +24,8 @@ const item = {
 };
 
 export function Hero() {
+  const { t } = useTranslations();
+
   return (
     <section
       id="home"
@@ -34,20 +38,19 @@ export function Hero() {
         <div className="flex items-center justify-between px-5 sm:px-8 pt-4 sm:pt-5">
           <div className="inline-flex items-center gap-1 rounded-full bg-slate-900/80 p-1">
             {[
-              { label: "Home", href: "#home", active: true },
-              { label: "About", href: "#about" },
-              { label: "Work / Portfolio", href: "#projects" },
-              { label: "Blog", href: "#blog" },
-              { label: "Contact", href: "#contact" },
+              { label: t.nav.home, href: "#home", active: true },
+              { label: t.nav.about, href: "#about" },
+              { label: t.nav.projects, href: "#projects" },
+              { label: t.nav.blog, href: "#blog" },
+              { label: t.nav.contact, href: "#contact" },
             ].map((item) => (
               <a
                 key={item.label}
                 href={item.href}
-                className={`px-3 sm:px-4 py-1.5 text-xs sm:text-sm font-medium rounded-full transition-colors ${
-                  item.active
+                className={`px-3 sm:px-4 py-1.5 text-xs sm:text-sm font-medium rounded-full transition-colors ${item.active
                     ? "bg-violet-500 text-white shadow-[0_0_0_1px_rgba(255,255,255,0.12)]"
                     : "text-slate-300/80 hover:bg-slate-800/80"
-                }`}
+                  }`}
               >
                 {item.label}
               </a>
@@ -82,9 +85,7 @@ export function Hero() {
               variants={item}
               className="max-w-md text-sm sm:text-base text-slate-300"
             >
-              I craft interfaces and full-stack systems that feel intuitive,
-              performant, and dependable — turning complex problems into elegant
-              digital products.
+              {t.hero.subheading}
             </motion.p>
 
             <motion.div
@@ -97,7 +98,7 @@ export function Hero() {
                   className="gap-2 rounded-full px-5 py-2.5 text-sm"
                 >
                   <FolderOpen size={16} />
-                  View Projects
+                  {t.hero.ctaViewProjects}
                 </Button>
               </a>
               <a href="/cv.pdf" download="Salah-CV.pdf">
@@ -106,7 +107,7 @@ export function Hero() {
                   className="gap-2 rounded-full px-5 py-2.5 text-sm border-violet-400/70 text-violet-200 hover:bg-violet-500 hover:text-white"
                 >
                   <Download size={16} />
-                  Download CV
+                  {t.hero.ctaDownloadCv}
                 </Button>
               </a>
               <a href="#contact">
@@ -115,7 +116,7 @@ export function Hero() {
                   className="gap-2 rounded-full px-5 py-2.5 text-sm"
                 >
                   <Mail size={16} />
-                  Let&apos;s Talk
+                  {t.hero.ctaPrimary}
                 </Button>
               </a>
             </motion.div>
@@ -133,7 +134,7 @@ export function Hero() {
                   className="flex h-8 w-8 items-center justify-center rounded-full bg-violet-600 text-white hover:bg-violet-500 transition-colors"
                   aria-label="WhatsApp"
                 >
-                  <MessageCircle size={18} />
+                  <WhatsappIcon size={18} />
                 </a>
                 <a
                   href={socials.telegram}

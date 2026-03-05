@@ -6,6 +6,7 @@ import { personal } from "@/content/personal";
 import { skills, type SkillGroup, type SkillItem } from "@/content/skills";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { Tag } from "@/components/ui/Tag";
+import { useTranslations } from "@/components/i18n/useTranslations";
 
 const iconMap: Record<string, string> = {
   react: "⚛️",
@@ -42,6 +43,8 @@ const item = {
 };
 
 export function AboutSection() {
+  const { t } = useTranslations();
+
   return (
     <section
       id="about"
@@ -60,8 +63,8 @@ export function AboutSection() {
 
       <div className="container mx-auto px-4 sm:px-6">
         <SectionHeader
-          title="About Me"
-          subtitle="A quick snapshot of who I am and how I work."
+          title={t.about.title}
+          subtitle={t.about.subtitle}
         />
 
         <motion.div
@@ -77,11 +80,11 @@ export function AboutSection() {
             <motion.div
               variants={item}
               transition={{ duration: 0.5 }}
-              className="relative overflow-hidden rounded-2xl border border-border/70 bg-gradient-to-br from-background/70 via-background/90 to-background/60 p-6 sm:p-7"
+              className="relative overflow-hidden rounded-2xl border border-border/70 bg-linear-to-br from-background/70 via-background/90 to-background/60 p-6 sm:p-7"
             >
-              <div className="absolute inset-y-0 right-0 w-1/3 bg-gradient-to-l from-accent/10 to-transparent pointer-events-none" />
+              <div className="absolute inset-y-0 right-0 w-1/3 bg-linear-to-l from-accent/10 to-transparent pointer-events-none" />
               <p className="text-xs font-semibold uppercase tracking-[0.25em] text-accent mb-3">
-                Developer | Engineer | Passionate
+                {t.about.roleLine}
               </p>
               <p className="text-muted-foreground text-lg sm:text-xl leading-relaxed">
                 {personal.bio}
@@ -92,7 +95,7 @@ export function AboutSection() {
             <motion.div variants={item} className="space-y-4">
               <h3 className="flex items-center gap-2 text-lg font-semibold text-foreground">
                 <Zap className="h-5 w-5 text-accent" aria-hidden />
-                How I like to work
+                {t.about.howIWork}
               </h3>
               <div className="grid gap-3 sm:grid-cols-1">
                 {personal.values.map((value, i) => {
@@ -124,14 +127,10 @@ export function AboutSection() {
           >
             <h3 className="mb-2 flex items-center gap-2 text-lg font-semibold text-foreground">
               <Code2 className="h-5 w-5 text-accent" aria-hidden />
-              Skills spotlight
+              {t.about.skillsSpotlight}
             </h3>
             <p className="body-text mb-5 text-sm text-muted-foreground">
-              I work across the full stack, with a focus on{" "}
-              <span className="font-semibold text-foreground">
-                React, Next.js, TypeScript, Node.js
-              </span>{" "}
-              and modern DevOps practices.
+              {t.about.skillsIntro}
             </p>
             <div className="space-y-6">
               {skills.map((group: SkillGroup) => (
