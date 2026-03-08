@@ -16,9 +16,7 @@ export function SectionHeader({ title, subtitle }: SectionHeaderProps) {
       transition={{ duration: 0.5 }}
       className="mb-12 text-center"
     >
-      <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-        {title}
-      </h2>
+      <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">{title}</h2>
       {subtitle && (
         <p className="mt-3 max-w-2xl mx-auto text-muted-foreground text-lg">
           {subtitle}

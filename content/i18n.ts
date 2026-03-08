@@ -133,8 +133,7 @@ export const messages = {
     },
     contact: {
       title: "Contact",
-      subtitle:
-        "Contactez-moi ou écrivez-moi sur WhatsApp ou Telegram.",
+      subtitle: "Contactez-moi ou écrivez-moi sur WhatsApp ou Telegram.",
       nameLabel: "Nom",
       namePlaceholder: "Votre nom",
       emailLabel: "Email",

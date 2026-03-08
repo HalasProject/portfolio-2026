@@ -33,7 +33,10 @@ export function Header() {
           {personal.name}
         </Link>
 
-        <nav className="hidden md:flex items-center gap-8" aria-label="Main navigation">
+        <nav
+          className="hidden md:flex items-center gap-8"
+          aria-label="Main navigation"
+        >
           {navLinks.map((link) => (
             <a
               key={link.href}

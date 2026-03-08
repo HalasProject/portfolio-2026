@@ -20,4 +20,3 @@ export function WhatsappIcon({ size = 20, className }: Props) {
     </svg>
   );
 }
-

@@ -20,7 +20,7 @@ export function useFitNameToWidth() {
     const text = textEl.textContent || "";
     const temp = document.createElement("span");
     temp.style.cssText =
-      "visibility:hidden;position:absolute;white-space:nowrap;font-family:'Bebas Neue',sans-serif;letter-spacing:-3px;";
+      "visibility:hidden;position:absolute;white-space:nowrap;font-family:var(--font-bebas-neue),sans-serif;letter-spacing:-3px;";
     temp.textContent = text;
     document.body.appendChild(temp);
     for (let i = 0; i < 22; i++) {
@@ -34,7 +34,9 @@ export function useFitNameToWidth() {
   }, []);
 
   useEffect(() => {
-    const mq = window.matchMedia(`(max-width: ${SMALL_SCREEN_BREAKPOINT - 1}px)`);
+    const mq = window.matchMedia(
+      `(max-width: ${SMALL_SCREEN_BREAKPOINT - 1}px)`
+    );
     const handler = (e: MediaQueryListEvent) => setIsSmallScreen(e.matches);
     queueMicrotask(() => setIsSmallScreen(mq.matches));
     mq.addEventListener("change", handler);

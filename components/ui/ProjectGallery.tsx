@@ -15,7 +15,9 @@ export function ProjectGallery({ images, title }: ProjectGalleryProps) {
   const previousFocusRef = useRef<HTMLElement | null>(null);
 
   const goPrev = useCallback(() => {
-    setOpenIndex((i) => (i === null ? null : (i - 1 + images.length) % images.length));
+    setOpenIndex((i) =>
+      i === null ? null : (i - 1 + images.length) % images.length
+    );
   }, [images.length]);
 
   const goNext = useCallback(() => {

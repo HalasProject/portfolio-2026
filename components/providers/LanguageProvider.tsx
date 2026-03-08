@@ -16,7 +16,7 @@ type LanguageContextValue = {
 };
 
 const LanguageContext = createContext<LanguageContextValue | undefined>(
-  undefined,
+  undefined
 );
 
 const STORAGE_KEY = "portfolio-language";
@@ -28,7 +28,7 @@ export function LanguageProvider({ children }: { children: ReactNode }) {
     if (typeof window === "undefined") return;
     const stored = window.localStorage.getItem(STORAGE_KEY);
     if (stored && SUPPORTED_LANGUAGES.includes(stored as Language)) {
-      setLanguageState(stored as Language);
+      queueMicrotask(() => setLanguageState(stored as Language));
     }
   }, []);
 
@@ -53,4 +53,3 @@ export function useLanguage() {
   }
   return ctx;
 }
-

@@ -30,10 +30,11 @@ export function HeroBottom({ tagline, subheading, socials, loaded }: Props) {
         <button
           type="button"
           onClick={() => setLanguage("en")}
-          className={`cursor-pointer tracking-[0.18em] ${language === "en"
-            ? "text-white"
-            : "text-white/60 hover:text-white/90"
-            }`}
+          className={`cursor-pointer tracking-[0.18em] ${
+            language === "en"
+              ? "text-white"
+              : "text-white/60 hover:text-white/90"
+          }`}
           aria-label={t.languageEnLabel}
           aria-pressed={language === "en"}
         >
@@ -45,10 +46,11 @@ export function HeroBottom({ tagline, subheading, socials, loaded }: Props) {
         <button
           type="button"
           onClick={() => setLanguage("fr")}
-          className={`cursor-pointer tracking-[0.18em] ${language === "fr"
-            ? "text-white"
-            : "text-white/60 hover:text-white/90"
-            }`}
+          className={`cursor-pointer tracking-[0.18em] ${
+            language === "fr"
+              ? "text-white"
+              : "text-white/60 hover:text-white/90"
+          }`}
           aria-label={t.languageFrLabel}
           aria-pressed={language === "fr"}
         >

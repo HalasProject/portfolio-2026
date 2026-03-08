@@ -62,10 +62,7 @@ export function AboutSection() {
       />
 
       <div className="container mx-auto px-4 sm:px-6">
-        <SectionHeader
-          title={t.about.title}
-          subtitle={t.about.subtitle}
-        />
+        <SectionHeader title={t.about.title} subtitle={t.about.subtitle} />
 
         <motion.div
           variants={container}

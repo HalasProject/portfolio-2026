@@ -35,7 +35,13 @@ export function HeroSocials({ socials }: { socials: Socials }) {
         className="social-btn"
         aria-label="GitHub"
       >
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="white" aria-hidden>
+        <svg
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="white"
+          aria-hidden
+        >
           <path d={GITHUB_PATH} />
         </svg>
       </a>
@@ -71,7 +77,13 @@ export function HeroSocialsMobile({ socials }: { socials: Socials }) {
         className="social-btn"
         aria-label="GitHub"
       >
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="white" aria-hidden>
+        <svg
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="white"
+          aria-hidden
+        >
           <path d={GITHUB_PATH} />
         </svg>
       </a>

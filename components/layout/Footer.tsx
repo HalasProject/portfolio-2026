@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { Mail, Github, Linkedin, Send } from "lucide-react";
 import { socials } from "@/content/socials";
 import { WhatsappIcon } from "@/components/icons/WhatsappIcon";

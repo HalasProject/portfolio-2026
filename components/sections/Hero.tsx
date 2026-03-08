@@ -47,10 +47,11 @@ export function Hero() {
               <a
                 key={item.label}
                 href={item.href}
-                className={`px-3 sm:px-4 py-1.5 text-xs sm:text-sm font-medium rounded-full transition-colors ${item.active
+                className={`px-3 sm:px-4 py-1.5 text-xs sm:text-sm font-medium rounded-full transition-colors ${
+                  item.active
                     ? "bg-violet-500 text-white shadow-[0_0_0_1px_rgba(255,255,255,0.12)]"
                     : "text-slate-300/80 hover:bg-slate-800/80"
-                  }`}
+                }`}
               >
                 {item.label}
               </a>

@@ -11,4 +11,3 @@ export function FeaturesHeading() {
     </h2>
   );
 }
-

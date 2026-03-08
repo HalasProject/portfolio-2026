@@ -6,7 +6,8 @@ export default function ProjectNotFound() {
     <main className="min-h-screen flex flex-col items-center justify-center px-4">
       <h1 className="text-2xl font-bold">Project not found</h1>
       <p className="mt-2 text-muted-foreground">
-        The project you're looking for doesn't exist or has been moved.
+        The project you&apos;re looking for doesn&apos;t exist or has been
+        moved.
       </p>
       <Link
         href="/#projects"

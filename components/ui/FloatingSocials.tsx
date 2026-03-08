@@ -17,7 +17,11 @@ export function FloatingSocials() {
     { href: `mailto:${socials.email}`, icon: Mail, label: "Email" },
     { href: socials.github, icon: Github, label: "GitHub" },
     { href: socials.linkedin, icon: Linkedin, label: "LinkedIn" },
-    { href: socials.whatsapp, icon: WhatsappIcon, label: t.contact.whatsappLabel },
+    {
+      href: socials.whatsapp,
+      icon: WhatsappIcon,
+      label: t.contact.whatsappLabel,
+    },
     { href: socials.telegram, icon: Send, label: t.contact.telegramLabel },
   ];
 
@@ -25,7 +29,7 @@ export function FloatingSocials() {
     const hero = document.getElementById("home");
     if (!hero) {
       // If there's no hero section (e.g. project detail pages), always show
-      setHeroInView(false);
+      queueMicrotask(() => setHeroInView(false));
       return;
     }
     const obs = new IntersectionObserver(
@@ -64,7 +68,9 @@ export function FloatingSocials() {
               key={label}
               href={href}
               target={href.startsWith("mailto") ? undefined : "_blank"}
-              rel={href.startsWith("mailto") ? undefined : "noopener noreferrer"}
+              rel={
+                href.startsWith("mailto") ? undefined : "noopener noreferrer"
+              }
               initial={{ opacity: 0, x: -12 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: i * 0.05 }}

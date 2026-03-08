@@ -6,7 +6,9 @@ export type ContactResult = { success: boolean; message: string };
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
-export async function contactAction(formData: FormData): Promise<ContactResult> {
+export async function contactAction(
+  formData: FormData
+): Promise<ContactResult> {
   const name = formData.get("name") as string | null;
   const email = formData.get("email") as string | null;
   const message = formData.get("message") as string | null;
@@ -22,17 +24,14 @@ export async function contactAction(formData: FormData): Promise<ContactResult> 
 
   try {
     await resend.emails.send({
-      from: process.env.CONTACT_FROM ?? "Portfolio Contact <onboarding@resend.dev>",
+      from:
+        process.env.CONTACT_FROM ?? "Portfolio Contact <onboarding@resend.dev>",
       to: process.env.CONTACT_TO ?? "bentayebtech@gmail.com",
       replyTo: email ?? undefined,
       subject: `New message from ${name} – Portfolio contact`,
-      text: [
-        `Name: ${name}`,
-        `Email: ${email}`,
-        "",
-        "Message:",
-        message,
-      ].join("\n"),
+      text: [`Name: ${name}`, `Email: ${email}`, "", "Message:", message].join(
+        "\n"
+      ),
     });
 
     return {

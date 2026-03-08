@@ -1,5 +1,4 @@
 import { notFound } from "next/navigation";
-import Link from "next/link";
 import { ProjectImage } from "@/components/ui/ProjectImage";
 import { ProjectGallery } from "@/components/ui/ProjectGallery";
 import { Check } from "lucide-react";
@@ -95,10 +94,11 @@ export default async function ProjectPage({
                     Miyam – Digital Menu Generator for Restaurants
                   </h2>
                   <p className="mt-3 text-muted-foreground">
-                    Miyam.io is a digital menu creation platform that lets restaurants, cafés,
-                    and fast-food businesses create, manage, and share modern mobile-friendly
-                    menus. It replaces static printed menus with dynamic digital menus that can
-                    be updated in seconds.
+                    Miyam.io is a digital menu creation platform that lets
+                    restaurants, cafés, and fast-food businesses create, manage,
+                    and share modern mobile-friendly menus. It replaces static
+                    printed menus with dynamic digital menus that can be updated
+                    in seconds.
                   </p>
                 </div>
 
@@ -108,15 +108,17 @@ export default async function ProjectPage({
                       Why I built it
                     </h3>
                     <p className="text-sm text-muted-foreground leading-relaxed">
-                      Spending a lot of time in restaurants, I kept seeing the same problems:
-                      outdated printed menus, missing items, no real photos, and inconsistent
-                      branding. Miyam was my answer — a way to help restaurant owners modernize
-                      their image, update menus instantly, and give customers a better digital
-                      experience.
+                      Spending a lot of time in restaurants, I kept seeing the
+                      same problems: outdated printed menus, missing items, no
+                      real photos, and inconsistent branding. Miyam was my
+                      answer — a way to help restaurant owners modernize their
+                      image, update menus instantly, and give customers a better
+                      digital experience.
                     </p>
                     <p className="text-sm text-muted-foreground leading-relaxed">
-                      We successfully onboarded over 100 restaurants, fast-food spots, and
-                      coffee shops across Algeria, helping them transition to digital menus.
+                      We successfully onboarded over 100 restaurants, fast-food
+                      spots, and coffee shops across Algeria, helping them
+                      transition to digital menus.
                     </p>
                   </div>
                   <div className="space-y-3">
@@ -163,9 +165,13 @@ export default async function ProjectPage({
                       </ul>
                     </div>
                     <div className="space-y-2 text-sm text-muted-foreground">
-                      <p className="font-medium text-foreground">Media & assets</p>
+                      <p className="font-medium text-foreground">
+                        Media & assets
+                      </p>
                       <ul className="space-y-1">
-                        <li>• S3 bucket for optimized image storage & delivery</li>
+                        <li>
+                          • S3 bucket for optimized image storage & delivery
+                        </li>
                         <li>• Fast loading menus even on mobile networks</li>
                       </ul>
                     </div>
@@ -177,10 +183,11 @@ export default async function ProjectPage({
                     Impact & what it represents
                   </h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    Miyam shows my ability to identify real problems in local markets, turn them
-                    into SaaS products, and design scalable full-stack solutions. It&apos;s a mix
-                    of product thinking and engineering — built to help small businesses go
-                    digital with tools that feel premium but stay simple to use.
+                    Miyam shows my ability to identify real problems in local
+                    markets, turn them into SaaS products, and design scalable
+                    full-stack solutions. It&apos;s a mix of product thinking
+                    and engineering — built to help small businesses go digital
+                    with tools that feel premium but stay simple to use.
                   </p>
                 </div>
               </section>
@@ -196,9 +203,10 @@ export default async function ProjectPage({
                     TrackFast – Real-Time GPS Tracking Platform
                   </h2>
                   <p className="mt-3 text-muted-foreground">
-                    TrackFast is a real-time GPS tracking system for cars and motorcycles.
-                    It lets vehicle owners and fleet managers monitor location, movement, and
-                    activity through a secure web dashboard — from device, to cloud, to UI.
+                    TrackFast is a real-time GPS tracking system for cars and
+                    motorcycles. It lets vehicle owners and fleet managers
+                    monitor location, movement, and activity through a secure
+                    web dashboard — from device, to cloud, to UI.
                   </p>
                 </div>
 
@@ -208,10 +216,11 @@ export default async function ProjectPage({
                       Why I built it
                     </h3>
                     <p className="text-sm text-muted-foreground leading-relaxed">
-                      I&apos;m passionate about cars and motorcycles, and wanted to see if I could
-                      build my own end-to-end GPS ecosystem — owning the full pipeline from
-                      embedded device to cloud infrastructure to real-time dashboard.
-                      What started as a curiosity turned into a production-ready, scalable
+                      I&apos;m passionate about cars and motorcycles, and wanted
+                      to see if I could build my own end-to-end GPS ecosystem —
+                      owning the full pipeline from embedded device to cloud
+                      infrastructure to real-time dashboard. What started as a
+                      curiosity turned into a production-ready, scalable
                       platform.
                     </p>
                   </div>
@@ -220,7 +229,9 @@ export default async function ProjectPage({
                       What it does
                     </h3>
                     <ul className="space-y-2 text-sm text-muted-foreground">
-                      <li>📍 Real-time GPS tracking with live location updates</li>
+                      <li>
+                        📍 Real-time GPS tracking with live location updates
+                      </li>
                       <li>📊 Movement history and route visualization</li>
                       <li>🚦 Vehicle status and activity monitoring</li>
                       <li>🔐 Secure device-to-server communication</li>
@@ -235,7 +246,9 @@ export default async function ProjectPage({
                   </h3>
                   <div className="grid gap-5 md:grid-cols-2">
                     <div className="space-y-2 text-sm text-muted-foreground">
-                      <p className="font-medium text-foreground">Device layer</p>
+                      <p className="font-medium text-foreground">
+                        Device layer
+                      </p>
                       <ul className="space-y-1">
                         <li>• GPS module for precise location data</li>
                         <li>• GSM / 4G module for data transmission</li>
@@ -243,7 +256,9 @@ export default async function ProjectPage({
                       </ul>
                     </div>
                     <div className="space-y-2 text-sm text-muted-foreground">
-                      <p className="font-medium text-foreground">Backend & APIs</p>
+                      <p className="font-medium text-foreground">
+                        Backend & APIs
+                      </p>
                       <ul className="space-y-1">
                         <li>• Java backend with custom TCP / socket server</li>
                         <li>• REST APIs consumed by the React dashboard</li>
@@ -259,7 +274,9 @@ export default async function ProjectPage({
                       </ul>
                     </div>
                     <div className="space-y-2 text-sm text-muted-foreground">
-                      <p className="font-medium text-foreground">Infrastructure</p>
+                      <p className="font-medium text-foreground">
+                        Infrastructure
+                      </p>
                       <ul className="space-y-1">
                         <li>• Cloud-hosted backend</li>
                         <li>• Time-series optimized database schema</li>
@@ -274,9 +291,10 @@ export default async function ProjectPage({
                     What this project shows
                   </h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    TrackFast reflects my ability to think beyond a simple web app: design a
-                    hardware-integrated system, architect the backend, build the frontend
-                    experience, and ship a solution that is both scalable and production-ready.
+                    TrackFast reflects my ability to think beyond a simple web
+                    app: design a hardware-integrated system, architect the
+                    backend, build the frontend experience, and ship a solution
+                    that is both scalable and production-ready.
                   </p>
                 </div>
               </section>
@@ -292,10 +310,11 @@ export default async function ProjectPage({
                     Blaner – Internal Management System for Food Businesses
                   </h2>
                   <p className="mt-3 text-muted-foreground">
-                    Blaner is an internal management application built for restaurants and
-                    fast-food businesses. It centralizes daily operations like purchases,
-                    supplier debts, employee salaries, treasury, revenue, and expenses into a
-                    single, easy-to-use dashboard.
+                    Blaner is an internal management application built for
+                    restaurants and fast-food businesses. It centralizes daily
+                    operations like purchases, supplier debts, employee
+                    salaries, treasury, revenue, and expenses into a single,
+                    easy-to-use dashboard.
                   </p>
                 </div>
 
@@ -305,15 +324,17 @@ export default async function ProjectPage({
                       Why I built it
                     </h3>
                     <p className="text-sm text-muted-foreground leading-relaxed">
-                      As the owner of a fast-food restaurant, I tried several ERPs and
-                      management tools. Most were too generic, too complex, or too expensive —
-                      and none matched the rhythm of a real fast-food operation. Blaner started
-                      as an internal tool to track meat purchases, bread orders, supplier debts,
-                      salaries, treasury balance, and expenses.
+                      As the owner of a fast-food restaurant, I tried several
+                      ERPs and management tools. Most were too generic, too
+                      complex, or too expensive — and none matched the rhythm of
+                      a real fast-food operation. Blaner started as an internal
+                      tool to track meat purchases, bread orders, supplier
+                      debts, salaries, treasury balance, and expenses.
                     </p>
                     <p className="text-sm text-muted-foreground leading-relaxed">
-                      After six months of daily use and iteration, I turned it into a SaaS
-                      product so other food businesses could benefit from the same clarity.
+                      After six months of daily use and iteration, I turned it
+                      into a SaaS product so other food businesses could benefit
+                      from the same clarity.
                     </p>
                   </div>
                   <div className="space-y-3">
@@ -321,7 +342,10 @@ export default async function ProjectPage({
                       What it manages
                     </h3>
                     <ul className="space-y-2 text-sm text-muted-foreground">
-                      <li>📦 Ingredient purchases (meat, bread, fries, drinks, etc.)</li>
+                      <li>
+                        📦 Ingredient purchases (meat, bread, fries, drinks,
+                        etc.)
+                      </li>
                       <li>🧾 Supplier debts and outstanding payments</li>
                       <li>👥 Employee salaries and payouts</li>
                       <li>💰 Treasury and cash flow</li>
@@ -343,7 +367,9 @@ export default async function ProjectPage({
                       </ul>
                     </div>
                     <div className="space-y-2 text-sm text-muted-foreground">
-                      <p className="font-medium text-foreground">Authentication</p>
+                      <p className="font-medium text-foreground">
+                        Authentication
+                      </p>
                       <ul className="space-y-1">
                         <li>• Firebase Authentication for secure access</li>
                       </ul>
@@ -351,14 +377,20 @@ export default async function ProjectPage({
                     <div className="space-y-2 text-sm text-muted-foreground">
                       <p className="font-medium text-foreground">Database</p>
                       <ul className="space-y-1">
-                        <li>• Firestore (real-time NoSQL) for operational data</li>
-                        <li>• Data model tuned for financial and daily tracking</li>
+                        <li>
+                          • Firestore (real-time NoSQL) for operational data
+                        </li>
+                        <li>
+                          • Data model tuned for financial and daily tracking
+                        </li>
                       </ul>
                     </div>
                     <div className="space-y-2 text-sm text-muted-foreground">
                       <p className="font-medium text-foreground">Deployment</p>
                       <ul className="space-y-1">
-                        <li>• Deployed on Vercel for fast, serverless hosting</li>
+                        <li>
+                          • Deployed on Vercel for fast, serverless hosting
+                        </li>
                       </ul>
                     </div>
                   </div>
@@ -369,10 +401,11 @@ export default async function ProjectPage({
                     What this project represents
                   </h3>
                   <p className="text-sm text-muted-foreground leading-relaxed">
-                    Blaner shows how I combine entrepreneurship with engineering — building a
-                    tool from inside a business, validating it in a real fast-food environment,
-                    then turning it into a SaaS product. It&apos;s a practical system designed
-                    from day-to-day operations, not from theory.
+                    Blaner shows how I combine entrepreneurship with engineering
+                    — building a tool from inside a business, validating it in a
+                    real fast-food environment, then turning it into a SaaS
+                    product. It&apos;s a practical system designed from
+                    day-to-day operations, not from theory.
                   </p>
                 </div>
               </section>

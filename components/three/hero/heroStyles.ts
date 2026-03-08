@@ -1,6 +1,4 @@
 export const HERO_STYLES = `
-  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500&display=swap');
-
   .hero-name-wrapper {
     position: absolute;
     top: 4px;
@@ -11,7 +9,7 @@ export const HERO_STYLES = `
     pointer-events: none;
   }
   .hero-name {
-    font-family: 'Bebas Neue', sans-serif;
+    font-family: var(--font-bebas-neue), sans-serif;
     line-height: 0.9;
     letter-spacing: -3px;
     color: white;
@@ -25,11 +23,11 @@ export const HERO_STYLES = `
     transform: translateY(0);
   }
   .body-text {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-inter), sans-serif;
     font-weight: 400;
   }
   .btn-text {
-    font-family: 'Inter', sans-serif;
+    font-family: var(--font-inter), sans-serif;
     font-weight: 500;
   }
   .fade-in {

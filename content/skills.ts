@@ -34,8 +34,8 @@ export const skills: SkillGroup[] = [
     items: [
       { name: "React", icon: "react" },
       { name: "Next.js", icon: "nextjs" },
-       { name: "Vue.js", icon: "vue" },
-       { name: "JavaScript", icon: "javascript" },
+      { name: "Vue.js", icon: "vue" },
+      { name: "JavaScript", icon: "javascript" },
       { name: "TypeScript", icon: "typescript" },
       { name: "Tailwind CSS", icon: "tailwind" },
     ],
@@ -63,9 +63,6 @@ export const skills: SkillGroup[] = [
   },
   {
     label: "AI & Automation",
-    items: [
-      { name: "AI Agents & Automation", icon: "aiAgent" },
-    ],
+    items: [{ name: "AI Agents & Automation", icon: "aiAgent" }],
   },
 ];
-

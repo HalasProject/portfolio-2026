@@ -1,14 +1,43 @@
-import { Footer } from "@/components/layout/Footer";
-import { Hero } from "@/components/sections/Hero";
-import { AboutSection } from "@/components/sections/AboutSection";
-import { ExperienceSection } from "@/components/sections/ExperienceSection";
-import { ProjectsSection } from "@/components/sections/ProjectsSection";
-import { ContactSection } from "@/components/sections/ContactSection";
+import dynamic from "next/dynamic";
+import { DeferredScrollEffects } from "@/components/layout/DeferredScrollEffects";
 import { ScrollProgressBar } from "@/components/ui/ScrollProgressBar";
 import { FloatingSocials } from "@/components/ui/FloatingSocials";
 import { MobileLanguageSwitcher } from "@/components/ui/MobileLanguageSwitcher";
 import HeroCanvas from "@/components/three/HeroCanvas";
-import { ScrollEffects } from "@/components/layout/ScrollEffects";
+
+const AboutSection = dynamic(
+  () => import("@/components/sections/AboutSection").then((m) => m.AboutSection),
+  { ssr: true }
+);
+
+const ExperienceSection = dynamic(
+  () =>
+    import("@/components/sections/ExperienceSection").then(
+      (m) => m.ExperienceSection
+    ),
+  { ssr: true }
+);
+
+const ProjectsSection = dynamic(
+  () =>
+    import("@/components/sections/ProjectsSection").then(
+      (m) => m.ProjectsSection
+    ),
+  { ssr: true }
+);
+
+const ContactSection = dynamic(
+  () =>
+    import("@/components/sections/ContactSection").then(
+      (m) => m.ContactSection
+    ),
+  { ssr: true }
+);
+
+const Footer = dynamic(
+  () => import("@/components/layout/Footer").then((m) => m.Footer),
+  { ssr: true }
+);
 
 export default function Home() {
   return (
@@ -16,7 +45,7 @@ export default function Home() {
       <ScrollProgressBar />
       <FloatingSocials />
       <MobileLanguageSwitcher />
-      <ScrollEffects />
+      <DeferredScrollEffects />
       <main id="main-content">
         <HeroCanvas />
         {/* <Hero /> */}

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Bebas_Neue, Geist, Geist_Mono, Inter } from "next/font/google";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
 import { LanguageProvider } from "@/components/providers/LanguageProvider";
 import { LangSync } from "@/components/a11y/LangSync";
@@ -16,6 +16,20 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const bebasNeue = Bebas_Neue({
+  variable: "--font-bebas-neue",
+  subsets: ["latin"],
+  weight: "400",
+  display: "swap",
+});
+
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.salah.cloud"),
   title: {
@@ -24,7 +38,15 @@ export const metadata: Metadata = {
   },
   description:
     "Full-stack Software Engineer — React, Next.js & TypeScript. Explore projects, experience, and connect.",
-  keywords: ["Salah", "Software Engineer", "portfolio", "React", "Next.js", "TypeScript", "full-stack"],
+  keywords: [
+    "Salah",
+    "Software Engineer",
+    "portfolio",
+    "React",
+    "Next.js",
+    "TypeScript",
+    "full-stack",
+  ],
   authors: [{ name: "Salah" }],
   openGraph: {
     title: "Salah | Software Engineer",
@@ -66,7 +88,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="dark" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-background text-foreground`}
+        className={`${geistSans.variable} ${geistMono.variable} ${bebasNeue.variable} ${inter.variable} antialiased min-h-screen bg-background text-foreground`}
       >
         <a
           href="#main-content"

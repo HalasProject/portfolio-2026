@@ -1,5 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500&display=swap");
-
 .hero-name-wrapper {
   position: absolute;
   top: 4px;
@@ -10,31 +8,35 @@
   pointer-events: none;
 }
 .hero-name {
-  font-family: "Bebas Neue", sans-serif;
+  font-family: var(--font-bebas-neue), sans-serif;
   line-height: 0.9;
   letter-spacing: -3px;
   color: white;
   white-space: nowrap;
   opacity: 0;
   transform: translateY(20px);
-  transition: opacity 0.8s ease, transform 0.8s ease;
+  transition:
+    opacity 0.8s ease,
+    transform 0.8s ease;
 }
 .hero-name.visible {
   opacity: 1;
   transform: translateY(0);
 }
 .body-text {
-  font-family: "Inter", sans-serif;
+  font-family: var(--font-inter), sans-serif;
   font-weight: 400;
 }
 .btn-text {
-  font-family: "Inter", sans-serif;
+  font-family: var(--font-inter), sans-serif;
   font-weight: 500;
 }
 .fade-in {
   opacity: 0;
   transform: translateY(16px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
+  transition:
+    opacity 0.7s ease,
+    transform 0.7s ease;
 }
 .fade-in.visible {
   opacity: 1;
@@ -152,4 +154,3 @@
     opacity: 1;
   }
 }
-

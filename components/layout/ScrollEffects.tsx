@@ -37,4 +37,3 @@ export function ScrollEffects() {
 
   return null;
 }
-

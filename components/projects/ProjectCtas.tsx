@@ -42,4 +42,3 @@ export function ProjectCtas({ liveUrl, githubUrl }: Props) {
     </div>
   );
 }
-

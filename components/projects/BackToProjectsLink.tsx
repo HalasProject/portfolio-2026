@@ -21,4 +21,3 @@ export function BackToProjectsLink({ href }: Props) {
     </Link>
   );
 }
-

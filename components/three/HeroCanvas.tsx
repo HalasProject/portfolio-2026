@@ -31,7 +31,7 @@ export default function HeroCanvas() {
     <section
       id="home"
       data-section
-      style={{ fontFamily: "'Bebas Neue', sans-serif" }}
+      style={{ fontFamily: "var(--font-bebas-neue), sans-serif" }}
       className="relative w-full min-h-screen bg-black overflow-hidden rounded-3xl"
     >
       <HeroGlowBackground />

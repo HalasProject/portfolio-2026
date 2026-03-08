@@ -29,10 +29,7 @@ export function ContactSection() {
   return (
     <section id="contact" data-section className="py-20 sm:py-28 bg-card/20">
       <div className="container mx-auto px-4 sm:px-6">
-        <SectionHeader
-          title={t.contact.title}
-          subtitle={t.contact.subtitle}
-        />
+        <SectionHeader title={t.contact.title} subtitle={t.contact.subtitle} />
 
         <div className="mx-auto max-w-xl space-y-8">
           <motion.form
@@ -96,10 +93,11 @@ export function ContactSection() {
                 role="status"
                 aria-live="polite"
                 aria-atomic="true"
-                className={`rounded-xl px-4 py-3 text-sm ${result.success
+                className={`rounded-xl px-4 py-3 text-sm ${
+                  result.success
                     ? "bg-green-500/10 text-green-600 dark:text-green-400 border border-green-500/20"
                     : "bg-red-500/10 text-red-600 dark:text-red-400 border border-red-500/20"
-                  }`}
+                }`}
               >
                 {result.message}
               </div>
